@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate the stock break-even sell price after buy price, shares, and trading charges.">
+    <title>Stock Break-Even Price Calculator - StockMarketWave</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header" data-site-header>
+        <nav class="site-nav container" aria-label="Primary navigation">
+            <a class="brand" href="../index.html" aria-label="StockMarketWave home"><span class="brand__mark" aria-hidden="true">SMW</span><span class="brand__name">StockMarketWave</span></a>
+            <ul class="site-nav__menu" id="primary-menu" data-nav-menu><li><a href="../calculators.html">Calculators</a></li></ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-section page-section--hero calculator-detail" aria-labelledby="calculator-title">
+            <div class="container calculator-detail__grid">
+                <div class="calculator-detail__intro">
+                    <p class="eyebrow">Stocks calculator</p>
+                    <h1 id="calculator-title">Stock Break-Even Price Calculator</h1>
+                    <p>Find the minimum sell price needed to recover your buy cost and trading charges.</p>
+                </div>
+                <aside class="calculator-note-card"><span>Price target support</span><p>Use this before placing a sell order so fees are included in your target price.</p></aside>
+            </div>
+        </section>
+
+        <section class="page-section calculator-workspace-section">
+            <div class="container calculator-workspace">
+                <form class="calculator-form" data-stock-breakeven-form>
+                    <div class="calculator-form__header"><span>Inputs</span><h2>Cost details</h2><p>Enter buy cost and expected sell-side charges.</p></div>
+                    <div class="form-grid">
+                        <label class="field"><span>Buy price per share</span><input type="number" name="buyPrice" min="0" step="0.01" value="120"></label>
+                        <label class="field"><span>Number of shares</span><input type="number" name="shares" min="0" step="1" value="25"></label>
+                        <label class="field"><span>Buy charges / fees</span><input type="number" name="buyFees" min="0" step="0.01" value="0"></label>
+                        <label class="field"><span>Expected sell charges / fees</span><input type="number" name="sellFees" min="0" step="0.01" value="0"></label>
+                    </div>
+                    <div class="calculator-form__actions"><button class="button button--primary" type="submit">Calculate break-even</button><button class="button button--ghost" type="reset">Reset example</button></div>
+                </form>
+
+                <section class="calculator-results" aria-live="polite">
+                    <div class="calculator-results__header"><span>Results</span><h2>Break-even summary</h2></div>
+                    <div class="result-card-grid">
+                        <article class="result-card result-card--primary"><span>Break-even sell price</span><strong data-stock-breakeven-output="breakEven">120.00</strong></article>
+                        <article class="result-card"><span>Total cost</span><strong data-stock-breakeven-output="totalCost">3,000.00</strong></article>
+                        <article class="result-card"><span>Total charges</span><strong data-stock-breakeven-output="totalFees">0.00</strong></article>
+                        <article class="result-card"><span>Break-even proceeds</span><strong data-stock-breakeven-output="requiredProceeds">3,000.00</strong></article>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+        <section class="page-section calculator-guide-section">
+            <div class="container calculator-guide-grid">
+                <details class="guide-card formula-details"><summary><span>Formula</span><strong>View calculation method</strong></summary><div class="formula-stack"><div class="formula-row"><span>Total cost</span><code>(Buy price x Shares) + Buy charges</code></div><div class="formula-row"><span>Required proceeds</span><code>Total cost + Expected sell charges</code></div><div class="formula-row"><span>Break-even price</span><code>Required proceeds / Shares</code></div></div></details>
+                <article class="guide-card"><span>Related calculators</span><h2>Continue from here</h2><div class="related-calculator-list"><a href="stock-profit-loss.html">Stock Profit / Loss Calculator</a><a href="stock-average-price.html">Stock Average Price Calculator</a><a href="roi-calculator.html">ROI Calculator</a></div></article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer"><div class="container"><p>&copy; <span id="year"></span> StockMarketWave. Educational tools only; not financial advice.</p></div></footer>
+    <script src="../script.js" defer></script>
+</body>
+</html>
