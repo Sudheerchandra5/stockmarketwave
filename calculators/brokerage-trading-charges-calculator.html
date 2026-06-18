@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate stock brokerage and trading charges using turnover, brokerage, exchange charges, taxes, and other fees.">
+    <title>Brokerage & Trading Charges Calculator - StockMarketWave</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header" data-site-header><nav class="site-nav container" aria-label="Primary navigation"><a class="brand" href="../index.html" aria-label="StockMarketWave home"><span class="brand__mark" aria-hidden="true">SMW</span><span class="brand__name">StockMarketWave</span></a><ul class="site-nav__menu" id="primary-menu" data-nav-menu><li><a href="../calculators.html">Calculators</a></li></ul></nav></header>
+    <main>
+        <section class="page-section page-section--hero calculator-detail" aria-labelledby="calculator-title"><div class="container calculator-detail__grid"><div class="calculator-detail__intro"><p class="eyebrow">Stocks calculator</p><h1 id="calculator-title">Brokerage & Trading Charges Calculator</h1><p>Estimate total trading costs by entering turnover, brokerage, taxes, exchange fees, and other charges.</p></div><aside class="calculator-note-card"><span>Cost control</span><p>Use this before trading to understand how charges affect your break-even and net return.</p></aside></div></section>
+        <section class="page-section calculator-workspace-section"><div class="container calculator-workspace">
+            <form class="calculator-form" data-brokerage-form>
+                <div class="calculator-form__header"><span>Inputs</span><h2>Charge details</h2><p>Enter either exact charges or percentage rates based on your broker.</p></div>
+                <div class="form-grid">
+                    <label class="field"><span>Buy turnover</span><input type="number" name="buyTurnover" min="0" step="0.01" value="3000"></label>
+                    <label class="field"><span>Sell turnover</span><input type="number" name="sellTurnover" min="0" step="0.01" value="3550"></label>
+                    <label class="field"><span>Brokerage</span><input type="number" name="brokerage" min="0" step="0.01" value="40"></label>
+                    <label class="field"><span>Exchange/transaction charges</span><input type="number" name="exchangeCharges" min="0" step="0.01" value="5"></label>
+                    <label class="field"><span>Taxes and regulatory fees</span><input type="number" name="taxes" min="0" step="0.01" value="12"></label>
+                    <label class="field"><span>Other charges</span><input type="number" name="otherCharges" min="0" step="0.01" value="0"></label>
+                </div>
+                <div class="calculator-form__actions"><button class="button button--primary" type="submit">Calculate charges</button><button class="button button--ghost" type="reset">Reset example</button></div>
+            </form>
+            <section class="calculator-results" aria-live="polite"><div class="calculator-results__header"><span>Results</span><h2>Trading charges summary</h2></div><div class="result-card-grid"><article class="result-card result-card--primary"><span>Total charges</span><strong data-brokerage-output="totalCharges">57.00</strong></article><article class="result-card"><span>Total turnover</span><strong data-brokerage-output="totalTurnover">6,550.00</strong></article><article class="result-card"><span>Charge rate</span><strong data-brokerage-output="chargeRate">0.87%</strong></article><article class="result-card"><span>Net proceeds after charges</span><strong data-brokerage-output="netProceeds">3,493.00</strong></article></div></section>
+        </div></section>
+        <section class="page-section calculator-guide-section"><div class="container calculator-guide-grid"><details class="guide-card formula-details"><summary><span>Formula</span><strong>View calculation method</strong></summary><div class="formula-stack"><div class="formula-row"><span>Total turnover</span><code>Buy turnover + Sell turnover</code></div><div class="formula-row"><span>Total charges</span><code>Brokerage + Exchange charges + Taxes + Other charges</code></div><div class="formula-row"><span>Charge rate</span><code>Total charges / Total turnover x 100</code></div></div></details><article class="guide-card"><span>Related calculators</span><h2>Continue from here</h2><div class="related-calculator-list"><a href="stock-profit-loss.html">Stock Profit / Loss Calculator</a><a href="stock-break-even-price.html">Break-Even Price Calculator</a><a href="intraday-trading-calculator.html">Intraday Trading Calculator</a></div></article></div></section>
+    </main>
+    <footer class="site-footer"><div class="container"><p>&copy; <span id="year"></span> StockMarketWave. Educational tools only; not financial advice.</p></div></footer>
+    <script src="../script.js" defer></script>
+</body>
+</html>

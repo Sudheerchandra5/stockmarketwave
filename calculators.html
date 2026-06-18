@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse StockMarketWave calculators for stocks, mutual funds, ETFs, SIP, SWP, STP, profit, returns, dividends, risk, and portfolio planning.">
+    <title>Calculators - StockMarketWave</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Site Header / Primary Navigation -->
+    <header class="site-header" data-site-header>
+        <nav class="site-nav container" aria-label="Primary navigation">
+            <a class="brand" href="index.html" aria-label="StockMarketWave home">
+                <span class="brand__mark" aria-hidden="true">SMW</span>
+                <span class="brand__name">StockMarketWave</span>
+            </a>
+
+            <ul class="site-nav__menu" id="primary-menu" data-nav-menu>
+                <li><a href="calculators.html" aria-current="page">Calculators</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Calculator Hub Section -->
+        <section class="page-section page-section--hero calculators" id="calculators" aria-labelledby="calculators-title">
+            <div class="container calculator-hub">
+                <div class="section-heading calculator-hub__heading">
+                    <p class="eyebrow">Calculator library</p>
+                    <h1 id="calculators-title">Choose the calculator that matches your investing question.</h1>
+                    <p>
+                        Start with manual-input calculators that work for any stock, mutual fund, or ETF.
+                        API auto-fill can be added later without blocking the core calculation experience.
+                    </p>
+                </div>
+
+                <div class="calculator-tabs" role="tablist" aria-label="Calculator categories">
+                    <button class="calculator-tab is-active" type="button" role="tab" aria-selected="true" data-calculator-tab="stocks">
+                        Stocks
+                    </button>
+                    <button class="calculator-tab" type="button" role="tab" aria-selected="false" data-calculator-tab="mutual-funds">
+                        Mutual Funds
+                    </button>
+                    <button class="calculator-tab" type="button" role="tab" aria-selected="false" data-calculator-tab="etfs">
+                        ETFs
+                    </button>
+                </div>
+
+                <div class="calculator-showcase">
+                    <div class="calculator-feature-grid">
+                        <article class="calculator-card is-highlighted" data-calculator-card="stocks">
+                            <span class="calculator-card__tag">Stocks</span>
+                            <h3>Stocks calculators</h3>
+                            <p>Trading, investing, valuation, dividends, portfolio analytics, and derivatives calculators.</p>
+                            <ul>
+                                <li>Manual-input calculators first</li>
+                                <li>Grouped by investing use case</li>
+                                <li>Expandable into individual pages</li>
+                            </ul>
+                        </article>
+
+                        <article class="calculator-card" data-calculator-card="mutual-funds" hidden>
+                            <span class="calculator-card__tag">Mutual Funds</span>
+                            <h3>Mutual fund calculators</h3>
+                            <p>SIP, SWP, STP, goal planning, taxes, cost impact, returns, and fund analysis calculators.</p>
+                            <ul>
+                                <li>SIP, SWP, and STP planning</li>
+                                <li>Goal and tax calculators</li>
+                                <li>Fund comparison support</li>
+                            </ul>
+                        </article>
+
+                        <article class="calculator-card" data-calculator-card="etfs" hidden>
+                            <span class="calculator-card__tag">ETFs</span>
+                            <h3>ETF calculators</h3>
+                            <p>ETF returns, costs, NAV premium/discount, tracking, dividends, allocation, and risk calculators.</p>
+                            <ul>
+                                <li>Price and NAV calculators</li>
+                                <li>Cost and tax calculators</li>
+                                <li>ETF comparison calculators</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+
+                <div class="calculator-panels">
+                    <article class="calculator-panel is-active" data-calculator-panel="stocks">
+                        <div class="calculator-panel__header">
+                            <span>Stocks</span>
+                            <h3>Trading, investing, valuation, and portfolio calculators.</h3>
+                        </div>
+                        <div class="calculator-group-grid">
+                            <section class="calculator-group">
+                                <h4>Profit, return, and pricing</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="calculators/stock-profit-loss.html">Stock Profit / Loss Calculator</a></li>
+                                    <li><a href="calculators/stock-average-price.html">Stock Average Price Calculator</a></li>
+                                    <li><a href="calculators/stock-break-even-price.html">Stock Break-Even Price Calculator</a></li>
+                                    <li><a href="calculators/roi-calculator.html">ROI Calculator</a></li>
+                                    <li><a href="calculators/total-return-calculator.html">Total Return Calculator</a></li>
+                                    <li><a href="calculators/cagr-annualized-return-calculator.html">CAGR / Annualized Return Calculator</a></li>
+                                    <li><a href="calculators/capital-gains-calculator.html">Capital Gains Calculator</a></li>
+                                    <li><a href="calculators/after-tax-return-calculator.html">After-Tax Return Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Trading charges and execution</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="calculators/brokerage-trading-charges-calculator.html">Brokerage & Trading Charges Calculator</a></li>
+                                    <li><a href="calculators/intraday-trading-calculator.html">Intraday Trading Calculator</a></li>
+                                    <li><a href="calculators/delivery-trading-calculator.html">Delivery Trading Calculator</a></li>
+                                    <li><a href="calculators/bid-ask-spread-cost-calculator.html">Bid-Ask Spread Cost Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Risk and position management</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="calculators/position-size-calculator.html">Position Size Calculator</a></li>
+                                    <li><a href="calculators/risk-reward-ratio-calculator.html">Risk Reward Ratio Calculator</a></li>
+                                    <li><a href="calculators/stop-loss-calculator.html">Stop Loss Calculator</a></li>
+                                    <li><a href="calculators/target-price-calculator.html">Target Price Calculator</a></li>
+                                    <li><a href="calculators/trailing-stop-loss-calculator.html">Trailing Stop Loss Calculator</a></li>
+                                    <li><a href="calculators/margin-trading-calculator.html">Margin Trading Calculator</a></li>
+                                    <li><a href="calculators/leverage-calculator.html">Leverage Calculator</a></li>
+                                    <li><a href="calculators/margin-call-calculator.html">Margin Call Calculator</a></li>
+                                    <li><a href="calculators/pledge-margin-calculator.html">Pledge Margin Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Corporate actions</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="calculators/stock-split-calculator.html">Stock Split Calculator</a></li>
+                                    <li><a href="calculators/reverse-stock-split-calculator.html">Reverse Stock Split Calculator</a></li>
+                                    <li><a href="calculators/bonus-share-calculator.html">Bonus Share Calculator</a></li>
+                                    <li><a href="calculators/rights-issue-calculator.html">Rights Issue Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Dividend calculators</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="calculators/dividend-yield-calculator.html">Dividend Yield Calculator</a></li>
+                                    <li><a href="calculators/dividend-income-calculator.html">Dividend Income Calculator</a></li>
+                                    <li><a href="calculators/dividend-payout-ratio-calculator.html">Dividend Payout Ratio Calculator</a></li>
+                                    <li><a href="calculators/dividend-reinvestment-calculator.html">Dividend Reinvestment Calculator</a></li>
+                                    <li><a href="calculators/yield-on-cost-calculator.html">Yield on Cost Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Valuation and fundamentals</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="calculators/market-capitalization-calculator.html">Market Capitalization Calculator</a></li>
+                                    <li><a href="calculators/eps-calculator.html">EPS Calculator</a></li>
+                                    <li><a href="calculators/pe-ratio-calculator.html">P/E Ratio Calculator</a></li>
+                                    <li><a href="calculators/forward-pe-calculator.html">Forward P/E Calculator</a></li>
+                                    <li><a href="calculators/peg-ratio-calculator.html">PEG Ratio Calculator</a></li>
+                                    <li><a href="calculators/price-to-book-ratio-calculator.html">Price to Book Ratio Calculator</a></li>
+                                    <li><a href="calculators/price-to-sales-ratio-calculator.html">Price to Sales Ratio Calculator</a></li>
+                                    <li><a href="calculators/ev-ebitda-calculator.html">EV / EBITDA Calculator</a></li>
+                                    <li><a href="calculators/enterprise-value-calculator.html">Enterprise Value Calculator</a></li>
+                                    <li><a href="calculators/intrinsic-value-calculator.html">Intrinsic Value Calculator</a></li>
+                                    <li><a href="calculators/discounted-cash-flow-calculator.html">Discounted Cash Flow Calculator</a></li>
+                                    <li><a href="calculators/graham-number-calculator.html">Graham Number Calculator</a></li>
+                                    <li><a href="calculators/book-value-per-share-calculator.html">Book Value Per Share Calculator</a></li>
+                                    <li><a href="calculators/roe-calculator.html">ROE Calculator</a></li>
+                                    <li><a href="calculators/roce-calculator.html">ROCE Calculator</a></li>
+                                    <li><a href="calculators/debt-to-equity-ratio-calculator.html">Debt to Equity Ratio Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Portfolio and risk analytics</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="calculators/portfolio-allocation-calculator.html">Portfolio Allocation Calculator</a></li>
+                                    <li><a href="calculators/portfolio-rebalancing-calculator.html">Portfolio Rebalancing Calculator</a></li>
+                                    <li><a href="calculators/portfolio-return-calculator.html">Portfolio Return Calculator</a></li>
+                                    <li><a href="calculators/portfolio-risk-calculator.html">Portfolio Risk Calculator</a></li>
+                                    <li><a href="calculators/stock-correlation-calculator.html">Stock Correlation Calculator</a></li>
+                                    <li><a href="calculators/beta-calculator.html">Beta Calculator</a></li>
+                                    <li><a href="calculators/volatility-calculator.html">Volatility Calculator</a></li>
+                                    <li><a href="calculators/sharpe-ratio-calculator.html">Sharpe Ratio Calculator</a></li>
+                                    <li><a href="calculators/alpha-calculator.html">Alpha Calculator</a></li>
+                                    <li><a href="calculators/maximum-drawdown-calculator.html">Maximum Drawdown Calculator</a></li>
+                                    <li><a href="calculators/dollar-cost-averaging-calculator.html">Dollar Cost Averaging Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Derivatives</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="calculators/options-profit-calculator.html">Options Profit Calculator</a></li>
+                                    <li><a href="calculators/options-break-even-calculator.html">Options Break-Even Calculator</a></li>
+                                    <li><a href="calculators/covered-call-calculator.html">Covered Call Calculator</a></li>
+                                    <li><a href="calculators/cash-secured-put-calculator.html">Cash Secured Put Calculator</a></li>
+                                    <li><a href="calculators/futures-profit-calculator.html">Futures Profit Calculator</a></li>
+                                    <li><a href="calculators/futures-margin-calculator.html">Futures Margin Calculator</a></li>
+                                </ul>
+                            </section>
+                        </div>
+                    </article>
+
+                    <article class="calculator-panel" data-calculator-panel="mutual-funds" hidden>
+                        <div class="calculator-panel__header">
+                            <span>Mutual Funds</span>
+                            <h3>SIP, SWP, STP, tax, goals, and fund analysis calculators.</h3>
+                        </div>
+                        <div class="calculator-group-grid">
+                            <section class="calculator-group">
+                                <h4>SIP and recurring investment</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">SIP Calculator</a></li>
+                                    <li><a href="#">Step-Up SIP Calculator</a></li>
+                                    <li><a href="#">SIP Goal Calculator</a></li>
+                                    <li><a href="#">SIP Future Value Calculator</a></li>
+                                    <li><a href="#">Reverse SIP Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Lumpsum and withdrawals</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">Lumpsum Calculator</a></li>
+                                    <li><a href="#">SWP Calculator</a></li>
+                                    <li><a href="#">Reverse SWP Calculator</a></li>
+                                    <li><a href="#">STP Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Return measurement</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">Mutual Fund Return Calculator</a></li>
+                                    <li><a href="#">Mutual Fund CAGR / Annualized Return Calculator</a></li>
+                                    <li><a href="#">Absolute Return Calculator</a></li>
+                                    <li><a href="#">XIRR Calculator</a></li>
+                                    <li><a href="#">NAV Return Calculator</a></li>
+                                    <li><a href="#">Inflation Adjusted Return Calculator</a></li>
+                                    <li><a href="#">Real Return Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Goal planning</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">Goal-Based Investment Calculator</a></li>
+                                    <li><a href="#">Retirement Corpus Calculator</a></li>
+                                    <li><a href="#">Child Education Goal Calculator</a></li>
+                                    <li><a href="#">Wealth Creation Calculator</a></li>
+                                    <li><a href="#">Monthly Investment Required Calculator</a></li>
+                                    <li><a href="#">Investment Duration Calculator</a></li>
+                                    <li><a href="#">Required Return Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Cost, tax, and plan comparison</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">Expense Ratio Impact Calculator</a></li>
+                                    <li><a href="#">Exit Load Calculator</a></li>
+                                    <li><a href="#">Mutual Fund Tax Calculator</a></li>
+                                    <li><a href="#">Indexation Benefit Calculator</a></li>
+                                    <li><a href="#">ELSS Tax Saving Calculator</a></li>
+                                    <li><a href="#">Regular vs Direct Plan Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Units and income</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">Mutual Fund Units Calculator</a></li>
+                                    <li><a href="#">IDCW / Dividend Payout Calculator</a></li>
+                                    <li><a href="#">Dividend Reinvestment Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Portfolio and allocation</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">Asset Allocation Calculator</a></li>
+                                    <li><a href="#">Portfolio Rebalancing Calculator</a></li>
+                                    <li><a href="#">Equity vs Debt Allocation Calculator</a></li>
+                                    <li><a href="#">Risk Profile Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Fund analysis and comparison</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">Fund Comparison Calculator</a></li>
+                                    <li><a href="#">Fund Overlap Calculator</a></li>
+                                    <li><a href="#">Rolling Returns Calculator</a></li>
+                                    <li><a href="#">Standard Deviation Calculator</a></li>
+                                    <li><a href="#">Sharpe Ratio Calculator</a></li>
+                                    <li><a href="#">Sortino Ratio Calculator</a></li>
+                                    <li><a href="#">Alpha Calculator</a></li>
+                                    <li><a href="#">Beta Calculator</a></li>
+                                    <li><a href="#">Maximum Drawdown Calculator</a></li>
+                                </ul>
+                            </section>
+                        </div>
+                    </article>
+
+                    <article class="calculator-panel" data-calculator-panel="etfs" hidden>
+                        <div class="calculator-panel__header">
+                            <span>ETFs</span>
+                            <h3>ETF price, cost, dividend, tracking, and allocation calculators.</h3>
+                        </div>
+                        <div class="calculator-group-grid">
+                            <section class="calculator-group">
+                                <h4>Profit, return, and investment</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">ETF Profit / Loss Calculator</a></li>
+                                    <li><a href="#">ETF Average Price Calculator</a></li>
+                                    <li><a href="#">ETF Break-Even Price Calculator</a></li>
+                                    <li><a href="#">ETF Total Return Calculator</a></li>
+                                    <li><a href="#">ETF CAGR / Annualized Return Calculator</a></li>
+                                    <li><a href="#">ETF SIP Calculator</a></li>
+                                    <li><a href="#">ETF Lumpsum Calculator</a></li>
+                                    <li><a href="#">ETF Dollar Cost Averaging Calculator</a></li>
+                                    <li><a href="#">ETF Units Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>NAV, premium, and tracking</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">ETF NAV Calculator</a></li>
+                                    <li><a href="#">ETF iNAV Calculator</a></li>
+                                    <li><a href="#">ETF Premium / Discount Calculator</a></li>
+                                    <li><a href="#">ETF Tracking Error Calculator</a></li>
+                                    <li><a href="#">ETF Tracking Difference Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Cost and trading</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">ETF Expense Impact Calculator</a></li>
+                                    <li><a href="#">ETF Bid-Ask Spread Calculator</a></li>
+                                    <li><a href="#">ETF Liquidity Cost Calculator</a></li>
+                                    <li><a href="#">ETF Brokerage / Trading Charges Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Dividend and tax</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">ETF Dividend Yield Calculator</a></li>
+                                    <li><a href="#">ETF Dividend Income Calculator</a></li>
+                                    <li><a href="#">ETF Dividend Reinvestment Calculator</a></li>
+                                    <li><a href="#">ETF Tax Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Portfolio and allocation</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">ETF Asset Allocation Calculator</a></li>
+                                    <li><a href="#">ETF Portfolio Rebalancing Calculator</a></li>
+                                    <li><a href="#">ETF Sector Allocation Calculator</a></li>
+                                    <li><a href="#">ETF Country Allocation Calculator</a></li>
+                                    <li><a href="#">ETF Correlation Calculator</a></li>
+                                    <li><a href="#">ETF Overlap Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Risk analytics</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">ETF Risk Calculator</a></li>
+                                    <li><a href="#">ETF Volatility Calculator</a></li>
+                                    <li><a href="#">ETF Beta Calculator</a></li>
+                                    <li><a href="#">ETF Sharpe Ratio Calculator</a></li>
+                                    <li><a href="#">ETF Maximum Drawdown Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Comparison calculators</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">ETF vs Mutual Fund Cost Calculator</a></li>
+                                    <li><a href="#">ETF vs Index Fund Calculator</a></li>
+                                    <li><a href="#">ETF Fund Comparison Calculator</a></li>
+                                </ul>
+                            </section>
+                            <section class="calculator-group">
+                                <h4>Specialized ETF calculators</h4>
+                                <ul class="calculator-name-list">
+                                    <li><a href="#">Gold ETF Calculator</a></li>
+                                    <li><a href="#">Bond ETF Yield Calculator</a></li>
+                                    <li><a href="#">Bond ETF Duration Calculator</a></li>
+                                    <li><a href="#">International ETF Return Calculator</a></li>
+                                    <li><a href="#">Currency Impact Calculator</a></li>
+                                    <li><a href="#">Hedged vs Unhedged ETF Calculator</a></li>
+                                    <li><a href="#">Leveraged ETF Return Calculator</a></li>
+                                    <li><a href="#">Inverse ETF Return Calculator</a></li>
+                                </ul>
+                            </section>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; <span id="year"></span> StockMarketWave. Educational tools only; not financial advice.</p>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

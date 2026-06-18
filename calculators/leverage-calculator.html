@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate leverage multiple, borrowed amount, and equity percentage.">
+    <title>Leverage Calculator - StockMarketWave</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header" data-site-header><nav class="site-nav container" aria-label="Primary navigation"><a class="brand" href="../index.html" aria-label="StockMarketWave home"><span class="brand__mark" aria-hidden="true">SMW</span><span class="brand__name">StockMarketWave</span></a><ul class="site-nav__menu" id="primary-menu" data-nav-menu><li><a href="../calculators.html">Calculators</a></li></ul></nav></header>
+    <main>
+        <section class="page-section page-section--hero calculator-detail" aria-labelledby="calculator-title"><div class="container calculator-detail__grid"><div class="calculator-detail__intro"><p class="eyebrow">Stocks calculator</p><h1 id="calculator-title">Leverage Calculator</h1><p>Calculate leverage multiple, borrowed amount, and equity percentage.</p></div><aside class="calculator-note-card"><span>Exposure check</span><p>Calculate leverage ratio and borrowed amount from total position and your own capital.</p></aside></div></section>
+        <section class="page-section calculator-workspace-section"><div class="container calculator-workspace">
+            <form class="calculator-form" data-formula-calculator="leverage-calculator">
+                <div class="calculator-form__header"><span>Inputs</span><h2>Calculator inputs</h2><p>Adjust the values below to calculate the result instantly.</p></div>
+                <div class="form-grid">
+                        <label class="field"><span>Position value</span><input type="number" name="position" step="0.01" value="12000"></label>
+                        <label class="field"><span>Own capital</span><input type="number" name="capital" step="0.01" value="3000"></label>
+                </div>
+                <div class="calculator-form__actions"><button class="button button--primary" type="submit">Calculate result</button><button class="button button--ghost" type="reset">Reset example</button></div>
+            </form>
+            <section class="calculator-results" aria-live="polite" data-formula-scope="leverage-calculator"><div class="calculator-results__header"><span>Results</span><h2>Calculation summary</h2></div><div class="result-card-grid">
+                        <article class="result-card result-card--primary"><span>Leverage multiple</span><strong data-formula-output="capital &gt; 0 ? position / capital : 0" data-formula-format="number">0.00</strong></article>
+                        <article class="result-card"><span>Borrowed amount</span><strong data-formula-output="Math.max(position - capital, 0)" data-formula-format="number">0.00</strong></article>
+                        <article class="result-card"><span>Equity percentage</span><strong data-formula-output="position &gt; 0 ? capital / position * 100 : 0" data-formula-format="percent">0.00</strong></article>
+                        <article class="result-card"><span>Position value</span><strong data-formula-output="position" data-formula-format="number">0.00</strong></article>
+            </div></section>
+        </div></section>
+        <section class="page-section calculator-guide-section"><div class="container calculator-guide-grid"><details class="guide-card formula-details"><summary><span>Formula</span><strong>View calculation method</strong></summary><div class="formula-stack">
+                        <div class="formula-row"><span>Leverage</span><code>Position value / Own capital</code></div>
+                        <div class="formula-row"><span>Borrowed amount</span><code>Position value - Own capital</code></div>
+        </div></details><article class="guide-card"><span>Related calculators</span><h2>Continue from here</h2><div class="related-calculator-list"><a href="../calculators.html">Stock calculators hub</a><a href="../calculators.html">Stock Profit / Loss Calculator</a><a href="../calculators.html">ROI Calculator</a></div></article></div></section>
+    </main>
+    <footer class="site-footer"><div class="container"><p>&copy; <span id="year"></span> StockMarketWave. Educational tools only; not financial advice.</p></div></footer>
+    <script src="../script.js" defer></script>
+</body>
+</html>

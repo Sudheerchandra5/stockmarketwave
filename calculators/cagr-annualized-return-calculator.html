@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate CAGR and annualized return from beginning value, ending value, and holding period.">
+    <title>CAGR / Annualized Return Calculator - StockMarketWave</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="site-header" data-site-header><nav class="site-nav container" aria-label="Primary navigation"><a class="brand" href="../index.html" aria-label="StockMarketWave home"><span class="brand__mark" aria-hidden="true">SMW</span><span class="brand__name">StockMarketWave</span></a><ul class="site-nav__menu" id="primary-menu" data-nav-menu><li><a href="../calculators.html">Calculators</a></li></ul></nav></header>
+    <main>
+        <section class="page-section page-section--hero calculator-detail" aria-labelledby="calculator-title"><div class="container calculator-detail__grid"><div class="calculator-detail__intro"><p class="eyebrow">Stocks calculator</p><h1 id="calculator-title">CAGR / Annualized Return Calculator</h1><p>Calculate the annualized growth rate of a stock or portfolio over a holding period.</p></div><aside class="calculator-note-card"><span>Long-term comparison</span><p>CAGR helps compare investments with different holding periods on a yearly basis.</p></aside></div></section>
+        <section class="page-section calculator-workspace-section"><div class="container calculator-workspace">
+            <form class="calculator-form" data-cagr-form>
+                <div class="calculator-form__header"><span>Inputs</span><h2>Growth values</h2><p>Enter beginning value, ending value, and years held.</p></div>
+                <div class="form-grid">
+                    <label class="field"><span>Beginning value</span><input type="number" name="beginning" min="0" step="0.01" value="3000"></label>
+                    <label class="field"><span>Ending value</span><input type="number" name="ending" min="0" step="0.01" value="5000"></label>
+                    <label class="field"><span>Years</span><input type="number" name="years" min="0" step="0.01" value="3"></label>
+                </div>
+                <div class="calculator-form__actions"><button class="button button--primary" type="submit">Calculate CAGR</button><button class="button button--ghost" type="reset">Reset example</button></div>
+            </form>
+            <section class="calculator-results" aria-live="polite">
+                <div class="calculator-results__header"><span>Results</span><h2>Annualized return summary</h2></div>
+                <div class="result-card-grid">
+                    <article class="result-card result-card--primary"><span>CAGR</span><strong data-cagr-output="cagr">18.56%</strong></article>
+                    <article class="result-card"><span>Total gain</span><strong data-cagr-output="gain">2,000.00</strong></article>
+                    <article class="result-card"><span>Total return</span><strong data-cagr-output="totalReturn">66.67%</strong></article>
+                    <article class="result-card"><span>Holding period</span><strong data-cagr-output="years">3.00</strong></article>
+                </div>
+            </section>
+        </div></section>
+        <section class="page-section calculator-guide-section"><div class="container calculator-guide-grid"><details class="guide-card formula-details"><summary><span>Formula</span><strong>View calculation method</strong></summary><div class="formula-stack"><div class="formula-row"><span>CAGR</span><code>((Ending value / Beginning value) ^ (1 / Years) - 1) x 100</code></div><div class="formula-row"><span>Total return</span><code>((Ending value - Beginning value) / Beginning value) x 100</code></div></div></details><article class="guide-card"><span>Related calculators</span><h2>Continue from here</h2><div class="related-calculator-list"><a href="total-return-calculator.html">Total Return Calculator</a><a href="roi-calculator.html">ROI Calculator</a><a href="stock-profit-loss.html">Stock Profit / Loss Calculator</a></div></article></div></section>
+    </main>
+    <footer class="site-footer"><div class="container"><p>&copy; <span id="year"></span> StockMarketWave. Educational tools only; not financial advice.</p></div></footer>
+    <script src="../script.js" defer></script>
+</body>
+</html>
