@@ -493,6 +493,8 @@
         }
 
         const setActiveCategory = (category) => {
+            document.documentElement.dataset.calculatorCategory = category;
+
             tabs.forEach((tab) => {
                 const isActive = tab.dataset.calculatorTab === category;
                 tab.classList.toggle(stateClasses.active, isActive);
