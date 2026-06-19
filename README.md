@@ -20,9 +20,8 @@ This branch contains a static starter landing page with:
 .
 ├── index.html
 ├── calculators.html
-├── calculator.html
 ├── calculators
-│   └── stock calculator pages...
+│   └── calculator detail pages...
 ├── styles.css
 └── script.js
 ```
@@ -33,8 +32,6 @@ This branch contains a static starter landing page with:
   preview, and footer.
 - `calculators.html` contains the calculator hub with Stocks, Mutual Funds, and
   ETFs sections.
-- `calculator.html` is a reusable calculator detail skeleton for calculators
-  that are wired from the hub before they receive custom logic.
 - `calculators/` contains calculator detail pages with manual inputs, live
   results, compact formula references, and related links.
 - `styles.css` is plain CSS, organized with numbered sections for design tokens,
@@ -67,7 +64,6 @@ For Hostinger file manager, upload:
 
 - `index.html`
 - `calculators.html`
-- `calculator.html`
 - `calculators/`
 - `styles.css`
 - `script.js`
@@ -78,9 +74,8 @@ Make sure the final structure in `public_html` is:
 public_html/
 ├── index.html
 ├── calculators.html
-├── calculator.html
 ├── calculators/
-│   └── stock calculator pages...
+│   └── calculator detail pages...
 ├── styles.css
 └── script.js
 ```

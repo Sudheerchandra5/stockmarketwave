@@ -493,6 +493,8 @@
         }
 
         const setActiveCategory = (category) => {
+            document.documentElement.dataset.calculatorCategory = category;
+
             tabs.forEach((tab) => {
                 const isActive = tab.dataset.calculatorTab === category;
                 tab.classList.toggle(stateClasses.active, isActive);
@@ -512,9 +514,22 @@
             });
         };
 
+        const params = new URLSearchParams(window.location.search);
+        const requestedCategory = params.get("category") || window.location.hash.replace("#", "");
+        const hasRequestedCategory = tabs.some((tab) => tab.dataset.calculatorTab === requestedCategory);
+
+        if (hasRequestedCategory) {
+            setActiveCategory(requestedCategory);
+        }
+
         tabs.forEach((tab) => {
             tab.addEventListener("click", () => {
-                setActiveCategory(tab.dataset.calculatorTab);
+                const category = tab.dataset.calculatorTab;
+                setActiveCategory(category);
+
+                const nextUrl = new URL(window.location.href);
+                nextUrl.searchParams.set("category", category);
+                window.history.replaceState({}, "", nextUrl);
             });
         });
     };

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate absolute return from initial and current mutual fund value.">
+    <title>Absolute Return Calculator - StockMarketWave</title>
+    <link rel="stylesheet" href="/styles.css?v=20260619c">
+</head>
+<body>
+    <header class="site-header" data-site-header><nav class="site-nav container" aria-label="Primary navigation"><a class="brand" href="/index.html" aria-label="StockMarketWave home"><span class="brand__mark" aria-hidden="true">SMW</span><span class="brand__name">StockMarketWave</span></a><ul class="site-nav__menu" id="primary-menu" data-nav-menu><li><a href="/calculators.html?category=mutual-funds">Calculators</a></li></ul></nav></header>
+    <main>
+        <section class="page-section page-section--hero calculator-detail" aria-labelledby="calculator-title"><div class="container calculator-detail__grid"><div class="calculator-detail__intro"><p class="eyebrow">Mutual Funds calculator</p><h1 id="calculator-title">Absolute Return Calculator</h1><p>Calculate absolute return from initial and current mutual fund value.</p></div><aside class="calculator-note-card"><span>Point-to-point return</span><p>Absolute return ignores time and shows total gain percentage.</p></aside></div></section>
+        <section class="page-section calculator-workspace-section"><div class="container calculator-workspace">
+            <form class="calculator-form" data-formula-calculator="mutual-fund-absolute-return-calculator">
+                <div class="calculator-form__header"><span>Inputs</span><h2>Calculator inputs</h2><p>Adjust the values below, then click calculate to update results.</p></div>
+                <div class="form-grid">
+                        <label class="field"><span>Initial investment</span><input type="number" name="initial" step="0.01" value="10000"></label>
+                        <label class="field"><span>Current value</span><input type="number" name="current" step="0.01" value="13500"></label>
+                </div>
+                <div class="calculator-form__actions"><button class="button button--primary" type="submit">Calculate result</button><button class="button button--ghost" type="reset">Reset example</button></div>
+            </form>
+            <section class="calculator-results" aria-live="polite" data-formula-scope="mutual-fund-absolute-return-calculator"><div class="calculator-results__header"><span>Results</span><h2>Calculation summary</h2></div><div class="result-card-grid">
+                        <article class="result-card result-card--primary"><span>Absolute return</span><strong data-formula-output="initial &gt; 0 ? (current - initial) / initial * 100 : 0" data-formula-format="percent">0.00</strong></article>
+                        <article class="result-card"><span>Gain</span><strong data-formula-output="current - initial" data-formula-format="number">0.00</strong></article>
+                        <article class="result-card"><span>Initial investment</span><strong data-formula-output="initial" data-formula-format="number">0.00</strong></article>
+                        <article class="result-card"><span>Current value</span><strong data-formula-output="current" data-formula-format="number">0.00</strong></article>
+            </div></section>
+        </div></section>
+        <section class="page-section calculator-guide-section"><div class="container calculator-guide-grid"><details class="guide-card formula-details"><summary><span>Formula</span><strong>View calculation method</strong></summary><div class="formula-stack">
+                        <div class="formula-row"><span>Absolute return</span><code>(Current value - Initial investment) / Initial investment x 100</code></div>
+        </div></details><article class="guide-card"><span>Related calculators</span><h2>Continue from here</h2><div class="related-calculator-list"><a href="/calculators.html">Calculator hub</a><a href="/calculators.html?category=mutual-funds">Mutual Funds calculators</a></div></article></div></section>
+    </main>
+    <footer class="site-footer"><div class="container"><p>&copy; <span id="year"></span> StockMarketWave. Educational tools only; not financial advice.</p></div></footer>
+    <script src="/script.js?v=20260619c" defer></script>
+</body>
+</html>

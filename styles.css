@@ -545,16 +545,49 @@ p {
     padding: 0.85rem 1.15rem;
     color: var(--color-muted);
     background: transparent;
+    box-shadow: none;
     font-weight: 900;
     cursor: pointer;
     transition: color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.calculator-tab:hover,
+.calculator-tab:not(.is-active) {
+    color: var(--color-muted);
+    background: transparent;
+    box-shadow: none;
+}
+
 .calculator-tab.is-active {
     color: var(--color-surface);
     background: var(--color-primary);
     box-shadow: 0 0.75rem 1.5rem rgba(15, 118, 110, 0.22);
+}
+
+.calculator-tab:hover:not(.is-active) {
+    color: var(--color-primary);
+    background: var(--color-bg-soft);
+    box-shadow: none;
+}
+
+html[data-calculator-category] .calculator-tab {
+    color: var(--color-muted);
+    background: transparent;
+    box-shadow: none;
+}
+
+html[data-calculator-category="stocks"] .calculator-tab[data-calculator-tab="stocks"],
+html[data-calculator-category="mutual-funds"] .calculator-tab[data-calculator-tab="mutual-funds"],
+html[data-calculator-category="etfs"] .calculator-tab[data-calculator-tab="etfs"] {
+    color: var(--color-surface);
+    background: var(--color-primary);
+    box-shadow: 0 0.75rem 1.5rem rgba(15, 118, 110, 0.22);
+}
+
+html[data-calculator-category="stocks"] .calculator-tab:not([data-calculator-tab="stocks"]):hover,
+html[data-calculator-category="mutual-funds"] .calculator-tab:not([data-calculator-tab="mutual-funds"]):hover,
+html[data-calculator-category="etfs"] .calculator-tab:not([data-calculator-tab="etfs"]):hover {
+    color: var(--color-primary);
+    background: var(--color-bg-soft);
 }
 
 .calculator-showcase {
