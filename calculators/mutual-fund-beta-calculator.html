@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calculate beta with manual inputs and instant results.">
+    <title>Beta Calculator - StockMarketWave</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header class="site-header" data-site-header><nav class="site-nav container" aria-label="Primary navigation"><a class="brand" href="/index.html" aria-label="StockMarketWave home"><span class="brand__mark" aria-hidden="true">SMW</span><span class="brand__name">StockMarketWave</span></a><ul class="site-nav__menu" id="primary-menu" data-nav-menu><li><a href="/calculators.html">Calculators</a></li></ul></nav></header>
+    <main>
+        <section class="page-section page-section--hero calculator-detail" aria-labelledby="calculator-title"><div class="container calculator-detail__grid"><div class="calculator-detail__intro"><p class="eyebrow">Mutual Funds calculator</p><h1 id="calculator-title">Beta Calculator</h1><p>Calculate beta with manual inputs and instant results.</p></div><aside class="calculator-note-card"><span>Manual input</span><p>Enter values manually to calculate the result instantly.</p></aside></div></section>
+        <section class="page-section calculator-workspace-section"><div class="container calculator-workspace">
+            <form class="calculator-form" data-formula-calculator="mutual-fund-beta-calculator">
+                <div class="calculator-form__header"><span>Inputs</span><h2>Calculator inputs</h2><p>Adjust the values below, then click calculate to update results.</p></div>
+                <div class="form-grid">
+                        <label class="field"><span>Fund-market covariance</span><input type="number" name="covariance" step="0.01" value="0.018"></label>
+                        <label class="field"><span>Market variance</span><input type="number" name="marketVariance" step="0.01" value="0.012"></label>
+                </div>
+                <div class="calculator-form__actions"><button class="button button--primary" type="submit">Calculate result</button><button class="button button--ghost" type="reset">Reset example</button></div>
+            </form>
+            <section class="calculator-results" aria-live="polite" data-formula-scope="mutual-fund-beta-calculator"><div class="calculator-results__header"><span>Results</span><h2>Calculation summary</h2></div><div class="result-card-grid">
+                        <article class="result-card result-card--primary"><span>Beta</span><strong data-formula-output="marketVariance !== 0 ? covariance / marketVariance : 0" data-formula-format="number">0.00</strong></article>
+                        <article class="result-card"><span>Covariance</span><strong data-formula-output="covariance" data-formula-format="number">0.00</strong></article>
+                        <article class="result-card"><span>Market variance</span><strong data-formula-output="marketVariance" data-formula-format="number">0.00</strong></article>
+                        <article class="result-card"><span>Market sensitivity</span><strong data-formula-output="marketVariance !== 0 ? covariance / marketVariance : 0" data-formula-format="number">0.00</strong></article>
+            </div></section>
+        </div></section>
+        <section class="page-section calculator-guide-section"><div class="container calculator-guide-grid"><details class="guide-card formula-details"><summary><span>Formula</span><strong>View calculation method</strong></summary><div class="formula-stack">
+                        <div class="formula-row"><span>Beta</span><code>Covariance with market / Market variance</code></div>
+        </div></details><article class="guide-card"><span>Related calculators</span><h2>Continue from here</h2><div class="related-calculator-list"><a href="/calculators.html">Calculator hub</a><a href="/calculators.html">Mutual Funds calculators</a></div></article></div></section>
+    </main>
+    <footer class="site-footer"><div class="container"><p>&copy; <span id="year"></span> StockMarketWave. Educational tools only; not financial advice.</p></div></footer>
+    <script src="/script.js" defer></script>
+</body>
+</html>
