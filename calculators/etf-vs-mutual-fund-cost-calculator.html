@@ -3,35 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Calculate etf vs mutual fund cost with manual inputs and instant results.">
+    <meta name="description" content="Compare ETF and mutual fund cost impact over time.">
     <title>ETF vs Mutual Fund Cost Calculator - StockMarketWave</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <header class="site-header" data-site-header><nav class="site-nav container" aria-label="Primary navigation"><a class="brand" href="/index.html" aria-label="StockMarketWave home"><span class="brand__mark" aria-hidden="true">SMW</span><span class="brand__name">StockMarketWave</span></a><ul class="site-nav__menu" id="primary-menu" data-nav-menu><li><a href="/calculators.html">Calculators</a></li></ul></nav></header>
+    <header class="site-header" data-site-header><nav class="site-nav container" aria-label="Primary navigation"><a class="brand" href="/index.html" aria-label="StockMarketWave home"><span class="brand__mark" aria-hidden="true">SMW</span><span class="brand__name">StockMarketWave</span></a><ul class="site-nav__menu" id="primary-menu" data-nav-menu><li><a href="/calculators.html?category=etfs">Calculators</a></li></ul></nav></header>
     <main>
-        <section class="page-section page-section--hero calculator-detail" aria-labelledby="calculator-title"><div class="container calculator-detail__grid"><div class="calculator-detail__intro"><p class="eyebrow">ETFs calculator</p><h1 id="calculator-title">ETF vs Mutual Fund Cost Calculator</h1><p>Calculate etf vs mutual fund cost with manual inputs and instant results.</p></div><aside class="calculator-note-card"><span>Cost impact</span><p>Estimate the effect of costs, taxes, or plan differences on investment value.</p></aside></div></section>
+        <section class="page-section page-section--hero calculator-detail" aria-labelledby="calculator-title"><div class="container calculator-detail__grid"><div class="calculator-detail__intro"><p class="eyebrow">ETFs calculator</p><h1 id="calculator-title">ETF vs Mutual Fund Cost Calculator</h1><p>Compare ETF and mutual fund cost impact over time.</p></div><aside class="calculator-note-card"><span>Cost comparison</span><p>Compare expense drag between ETF and mutual fund choices.</p></aside></div></section>
         <section class="page-section calculator-workspace-section"><div class="container calculator-workspace">
             <form class="calculator-form" data-formula-calculator="etf-vs-mutual-fund-cost-calculator">
                 <div class="calculator-form__header"><span>Inputs</span><h2>Calculator inputs</h2><p>Adjust the values below, then click calculate to update results.</p></div>
                 <div class="form-grid">
-                        <label class="field"><span>Investment / gain amount</span><input type="number" name="amount" step="0.01" value="10000"></label>
-                        <label class="field"><span>Cost / tax / difference rate (%)</span><input type="number" name="rate" step="0.01" value="1"></label>
+                        <label class="field"><span>Investment amount</span><input type="number" name="investment" step="0.01" value="10000"></label>
+                        <label class="field"><span>Expected return (%)</span><input type="number" name="expectedReturn" step="0.01" value="10"></label>
+                        <label class="field"><span>ETF expense (%)</span><input type="number" name="etfExpense" step="0.01" value="0.2"></label>
+                        <label class="field"><span>Mutual fund expense (%)</span><input type="number" name="mfExpense" step="0.01" value="1"></label>
                         <label class="field"><span>Years</span><input type="number" name="years" step="0.01" value="10"></label>
                 </div>
                 <div class="calculator-form__actions"><button class="button button--primary" type="submit">Calculate result</button><button class="button button--ghost" type="reset">Reset example</button></div>
             </form>
             <section class="calculator-results" aria-live="polite" data-formula-scope="etf-vs-mutual-fund-cost-calculator"><div class="calculator-results__header"><span>Results</span><h2>Calculation summary</h2></div><div class="result-card-grid">
-                        <article class="result-card result-card--primary"><span>Estimated cost impact</span><strong data-formula-output="amount * rate / 100 * Math.max(years, 1)" data-formula-format="number">0.00</strong></article>
-                        <article class="result-card"><span>Value after impact</span><strong data-formula-output="amount - (amount * rate / 100 * Math.max(years, 1))" data-formula-format="number">0.00</strong></article>
-                        <article class="result-card"><span>Rate used</span><strong data-formula-output="rate" data-formula-format="percent">0.00</strong></article>
-                        <article class="result-card"><span>Years</span><strong data-formula-output="years" data-formula-format="number">0.00</strong></article>
+                        <article class="result-card result-card--primary"><span>ETF value</span><strong data-formula-output="investment * Math.pow(1 + (expectedReturn - etfExpense) / 100, years)" data-formula-format="number">0.00</strong></article>
+                        <article class="result-card"><span>Mutual fund value</span><strong data-formula-output="investment * Math.pow(1 + (expectedReturn - mfExpense) / 100, years)" data-formula-format="number">0.00</strong></article>
+                        <article class="result-card"><span>ETF advantage</span><strong data-formula-output="investment * Math.pow(1 + (expectedReturn - etfExpense) / 100, years) - investment * Math.pow(1 + (expectedReturn - mfExpense) / 100, years)" data-formula-format="number">0.00</strong></article>
+                        <article class="result-card"><span>Expense gap</span><strong data-formula-output="mfExpense - etfExpense" data-formula-format="percent">0.00</strong></article>
             </div></section>
         </div></section>
         <section class="page-section calculator-guide-section"><div class="container calculator-guide-grid"><details class="guide-card formula-details"><summary><span>Formula</span><strong>View calculation method</strong></summary><div class="formula-stack">
-                        <div class="formula-row"><span>Cost impact</span><code>Amount x Rate x Years</code></div>
-                        <div class="formula-row"><span>Value after impact</span><code>Amount - Cost impact</code></div>
-        </div></details><article class="guide-card"><span>Related calculators</span><h2>Continue from here</h2><div class="related-calculator-list"><a href="/calculators.html">Calculator hub</a><a href="/calculators.html">ETFs calculators</a></div></article></div></section>
+                        <div class="formula-row"><span>Net return</span><code>Expected return - Expense ratio</code></div>
+                        <div class="formula-row"><span>Advantage</span><code>ETF value - Mutual fund value</code></div>
+        </div></details><article class="guide-card"><span>Related calculators</span><h2>Continue from here</h2><div class="related-calculator-list"><a href="/calculators.html">Calculator hub</a><a href="/calculators.html?category=etfs">ETFs calculators</a></div></article></div></section>
     </main>
     <footer class="site-footer"><div class="container"><p>&copy; <span id="year"></span> StockMarketWave. Educational tools only; not financial advice.</p></div></footer>
     <script src="/script.js" defer></script>

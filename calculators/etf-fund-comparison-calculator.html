@@ -3,35 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Calculate etf fund comparison with manual inputs and instant results.">
+    <meta name="description" content="Compare two ETFs by return, expense ratio, and tracking difference.">
     <title>ETF Fund Comparison Calculator - StockMarketWave</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <header class="site-header" data-site-header><nav class="site-nav container" aria-label="Primary navigation"><a class="brand" href="/index.html" aria-label="StockMarketWave home"><span class="brand__mark" aria-hidden="true">SMW</span><span class="brand__name">StockMarketWave</span></a><ul class="site-nav__menu" id="primary-menu" data-nav-menu><li><a href="/calculators.html">Calculators</a></li></ul></nav></header>
+    <header class="site-header" data-site-header><nav class="site-nav container" aria-label="Primary navigation"><a class="brand" href="/index.html" aria-label="StockMarketWave home"><span class="brand__mark" aria-hidden="true">SMW</span><span class="brand__name">StockMarketWave</span></a><ul class="site-nav__menu" id="primary-menu" data-nav-menu><li><a href="/calculators.html?category=etfs">Calculators</a></li></ul></nav></header>
     <main>
-        <section class="page-section page-section--hero calculator-detail" aria-labelledby="calculator-title"><div class="container calculator-detail__grid"><div class="calculator-detail__intro"><p class="eyebrow">ETFs calculator</p><h1 id="calculator-title">ETF Fund Comparison Calculator</h1><p>Calculate etf fund comparison with manual inputs and instant results.</p></div><aside class="calculator-note-card"><span>Manual input</span><p>Enter values manually to calculate the result instantly.</p></aside></div></section>
+        <section class="page-section page-section--hero calculator-detail" aria-labelledby="calculator-title"><div class="container calculator-detail__grid"><div class="calculator-detail__intro"><p class="eyebrow">ETFs calculator</p><h1 id="calculator-title">ETF Fund Comparison Calculator</h1><p>Compare two ETFs by return, expense ratio, and tracking difference.</p></div><aside class="calculator-note-card"><span>ETF comparison</span><p>Compare rough net return between two ETFs.</p></aside></div></section>
         <section class="page-section calculator-workspace-section"><div class="container calculator-workspace">
             <form class="calculator-form" data-formula-calculator="etf-fund-comparison-calculator">
                 <div class="calculator-form__header"><span>Inputs</span><h2>Calculator inputs</h2><p>Adjust the values below, then click calculate to update results.</p></div>
                 <div class="form-grid">
-                        <label class="field"><span>Initial value</span><input type="number" name="initial" step="0.01" value="10000"></label>
-                        <label class="field"><span>Ending value</span><input type="number" name="ending" step="0.01" value="15000"></label>
+                        <label class="field"><span>Investment amount</span><input type="number" name="investment" step="0.01" value="10000"></label>
+                        <label class="field"><span>ETF A return (%)</span><input type="number" name="returnA" step="0.01" value="10"></label>
+                        <label class="field"><span>ETF A cost/tracking drag (%)</span><input type="number" name="costA" step="0.01" value="0.4"></label>
+                        <label class="field"><span>ETF B return (%)</span><input type="number" name="returnB" step="0.01" value="9.6"></label>
+                        <label class="field"><span>ETF B cost/tracking drag (%)</span><input type="number" name="costB" step="0.01" value="0.2"></label>
                         <label class="field"><span>Years</span><input type="number" name="years" step="0.01" value="5"></label>
                 </div>
                 <div class="calculator-form__actions"><button class="button button--primary" type="submit">Calculate result</button><button class="button button--ghost" type="reset">Reset example</button></div>
             </form>
             <section class="calculator-results" aria-live="polite" data-formula-scope="etf-fund-comparison-calculator"><div class="calculator-results__header"><span>Results</span><h2>Calculation summary</h2></div><div class="result-card-grid">
-                        <article class="result-card result-card--primary"><span>Total gain</span><strong data-formula-output="ending - initial" data-formula-format="number">0.00</strong></article>
-                        <article class="result-card"><span>Total return</span><strong data-formula-output="initial &gt; 0 ? (ending - initial) / initial * 100 : 0" data-formula-format="percent">0.00</strong></article>
-                        <article class="result-card"><span>Annualized return</span><strong data-formula-output="initial &gt; 0 &amp;&amp; ending &gt; 0 &amp;&amp; years &gt; 0 ? (Math.pow(ending / initial, 1 / years) - 1) * 100 : 0" data-formula-format="percent">0.00</strong></article>
-                        <article class="result-card"><span>Ending value</span><strong data-formula-output="ending" data-formula-format="number">0.00</strong></article>
+                        <article class="result-card result-card--primary"><span>ETF A value</span><strong data-formula-output="investment * Math.pow(1 + (returnA - costA) / 100, years)" data-formula-format="number">0.00</strong></article>
+                        <article class="result-card"><span>ETF B value</span><strong data-formula-output="investment * Math.pow(1 + (returnB - costB) / 100, years)" data-formula-format="number">0.00</strong></article>
+                        <article class="result-card"><span>Difference</span><strong data-formula-output="investment * Math.pow(1 + (returnA - costA) / 100, years) - investment * Math.pow(1 + (returnB - costB) / 100, years)" data-formula-format="number">0.00</strong></article>
+                        <article class="result-card"><span>Net return gap</span><strong data-formula-output="(returnA - costA) - (returnB - costB)" data-formula-format="percent">0.00</strong></article>
             </div></section>
         </div></section>
         <section class="page-section calculator-guide-section"><div class="container calculator-guide-grid"><details class="guide-card formula-details"><summary><span>Formula</span><strong>View calculation method</strong></summary><div class="formula-stack">
-                        <div class="formula-row"><span>Total return</span><code>(Ending value - Initial value) / Initial value x 100</code></div>
-                        <div class="formula-row"><span>Annualized return</span><code>((Ending value / Initial value) ^ (1 / Years) - 1) x 100</code></div>
-        </div></details><article class="guide-card"><span>Related calculators</span><h2>Continue from here</h2><div class="related-calculator-list"><a href="/calculators.html">Calculator hub</a><a href="/calculators.html">ETFs calculators</a></div></article></div></section>
+                        <div class="formula-row"><span>Net return</span><code>Return - Cost/tracking drag</code></div>
+                        <div class="formula-row"><span>Future value</span><code>Investment x (1 + Net return) ^ Years</code></div>
+        </div></details><article class="guide-card"><span>Related calculators</span><h2>Continue from here</h2><div class="related-calculator-list"><a href="/calculators.html">Calculator hub</a><a href="/calculators.html?category=etfs">ETFs calculators</a></div></article></div></section>
     </main>
     <footer class="site-footer"><div class="container"><p>&copy; <span id="year"></span> StockMarketWave. Educational tools only; not financial advice.</p></div></footer>
     <script src="/script.js" defer></script>
