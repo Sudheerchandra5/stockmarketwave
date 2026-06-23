@@ -878,9 +878,9 @@ html[data-calculator-category="etfs"] .calculator-tab:not([data-calculator-tab="
 }
 
 .formula-details summary {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    justify-content: space-between;
     gap: var(--space-4);
     cursor: pointer;
     list-style: none;
@@ -893,7 +893,8 @@ html[data-calculator-category="etfs"] .calculator-tab:not([data-calculator-tab="
 .formula-details summary::after {
     content: "+";
     display: grid;
-    flex: 0 0 auto;
+    grid-column: 2;
+    grid-row: 1 / span 2;
     width: 2rem;
     height: 2rem;
     place-items: center;
@@ -909,15 +910,23 @@ html[data-calculator-category="etfs"] .calculator-tab:not([data-calculator-tab="
 }
 
 .formula-details summary span {
+    grid-column: 1;
+    grid-row: 1;
     margin-bottom: var(--space-1);
 }
 
 .formula-details summary strong {
     display: block;
+    grid-column: 1;
+    grid-row: 2;
     color: var(--color-text);
     font-size: clamp(1.25rem, 4vw, 1.55rem);
     letter-spacing: -0.04em;
     line-height: 1.1;
+}
+
+.formula-details[open] .formula-stack {
+    margin-top: var(--space-4);
 }
 
 .form-grid {
