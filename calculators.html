@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z92994370B"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-Z92994370B');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <meta name="description" content="Browse free online investment calculators for stocks, mutual funds, ETFs, SIP, SWP, STP, returns, dividends, risk, tax, and portfolio planning.">
     <title>Free Investment Calculators | Stocks, Funds & ETFs</title>
-    <link rel="stylesheet" href="/styles.css?v=20260619c">
+    <link rel="stylesheet" href="/styles.css?v=20260623k">
     <script>
         document.documentElement.dataset.calculatorCategory =
             new URLSearchParams(window.location.search).get("category") ||
@@ -26,13 +35,14 @@
     <!-- Site Header / Primary Navigation -->
     <header class="site-header" data-site-header>
         <nav class="site-nav container" aria-label="Primary navigation">
-            <a class="brand" href="/index.html" aria-label="StockMarketWave home">
+            <a class="brand" href="/" aria-label="StockMarketWave home">
                 <span class="brand__mark" aria-hidden="true">SMW</span>
                 <span class="brand__name">StockMarketWave</span>
             </a>
 
             <ul class="site-nav__menu" id="primary-menu" data-nav-menu>
-                <li><a href="/calculators.html" aria-current="page">Calculators</a></li>
+                <li><a href="/calculators.html">Calculators</a></li>
+                <li><a href="/guides.html">Guides</a></li>
             </ul>
         </nav>
     </header>
@@ -67,43 +77,65 @@
                         <article class="calculator-card is-highlighted" data-calculator-card="stocks">
                             <span class="calculator-card__tag">Stocks</span>
                             <h3>Stocks calculators</h3>
-                            <p>Trading, investing, valuation, dividends, portfolio analytics, and derivatives calculators.</p>
+                            <p>Use free stock market calculators for profit/loss, average price, brokerage charges, dividends, valuation ratios, risk management, portfolio analysis, options, and futures.</p>
                             <ul>
-                                <li>Manual-input calculators first</li>
-                                <li>Grouped by investing use case</li>
-                                <li>Expandable into individual pages</li>
+                                <li>Profit, return, and price planning</li>
+                                <li>Valuation, dividends, and portfolio risk</li>
+                                <li>Options, futures, and trading charges</li>
                             </ul>
                         </article>
 
                         <article class="calculator-card" data-calculator-card="mutual-funds" hidden>
                             <span class="calculator-card__tag">Mutual Funds</span>
                             <h3>Mutual fund calculators</h3>
-                            <p>SIP, SWP, STP, goal planning, taxes, cost impact, returns, and fund analysis calculators.</p>
+                            <p>Use free mutual fund calculators for SIP, step-up SIP, SWP, STP, XIRR, CAGR, tax, expense ratio, exit load, goal planning, and fund comparison.</p>
                             <ul>
-                                <li>SIP, SWP, and STP planning</li>
-                                <li>Goal and tax calculators</li>
-                                <li>Fund comparison support</li>
+                                <li>SIP, SWP, STP, XIRR, and CAGR tools</li>
+                                <li>Tax, ELSS, expense ratio, and exit load</li>
+                                <li>Goal planning and fund analysis</li>
                             </ul>
                         </article>
 
                         <article class="calculator-card" data-calculator-card="etfs" hidden>
                             <span class="calculator-card__tag">ETFs</span>
                             <h3>ETF calculators</h3>
-                            <p>ETF returns, costs, NAV premium/discount, tracking, dividends, allocation, and risk calculators.</p>
+                            <p>Use free ETF calculators for returns, average price, NAV premium/discount, tracking error, expense impact, dividends, asset allocation, and ETF comparisons.</p>
                             <ul>
-                                <li>Price and NAV calculators</li>
-                                <li>Cost and tax calculators</li>
-                                <li>ETF comparison calculators</li>
+                                <li>ETF return, price, NAV, and tracking tools</li>
+                                <li>Expense, spread, tax, and dividend calculators</li>
+                                <li>Allocation, risk, and comparison calculators</li>
                             </ul>
                         </article>
                     </div>
                 </div>
 
+                <section class="calculator-guides-callout" aria-labelledby="calculator-guides-title">
+                    <div>
+                        <p class="eyebrow">Guides</p>
+                        <h2 id="calculator-guides-title">Need help choosing the right calculator?</h2>
+                        <p>Use these guides to understand formulas, assumptions, and common mistakes before calculating.</p>
+                    </div>
+                    <div class="guide-link-grid">
+                        <a class="guide-link-card" href="/guides/how-to-calculate-stock-profit.html">
+                            <strong>Stock profit guide</strong>
+                            <span>Profit, ROI, fees, and break-even basics.</span>
+                        </a>
+                        <a class="guide-link-card" href="/guides/swp-calculator-guide.html">
+                            <strong>SWP guide</strong>
+                            <span>Plan withdrawals and corpus sustainability.</span>
+                        </a>
+                        <a class="guide-link-card" href="/guides/expense-ratio-impact.html">
+                            <strong>Expense ratio guide</strong>
+                            <span>See how fund costs affect long-term value.</span>
+                        </a>
+                    </div>
+                </section>
+
                 <div class="calculator-panels">
-                    <article class="calculator-panel is-active" data-calculator-panel="stocks">
+                    <article class="calculator-panel is-active" id="stocks-calculators" data-calculator-panel="stocks">
                         <div class="calculator-panel__header">
                             <span>Stocks</span>
-                            <h3>Trading, investing, valuation, and portfolio calculators.</h3>
+                            <h2>Trading, investing, valuation, and portfolio calculators.</h2>
                         </div>
                         <div class="calculator-group-grid">
                             <section class="calculator-group">
@@ -212,10 +244,10 @@
                         </div>
                     </article>
 
-                    <article class="calculator-panel" data-calculator-panel="mutual-funds" hidden>
+                    <article class="calculator-panel" id="mutual-funds-calculators" data-calculator-panel="mutual-funds" hidden>
                         <div class="calculator-panel__header">
                             <span>Mutual Funds</span>
-                            <h3>SIP, SWP, STP, tax, goals, and fund analysis calculators.</h3>
+                            <h2>SIP, SWP, STP, tax, goals, and fund analysis calculators.</h2>
                         </div>
                         <div class="calculator-group-grid">
                             <section class="calculator-group">
@@ -306,10 +338,10 @@
                         </div>
                     </article>
 
-                    <article class="calculator-panel" data-calculator-panel="etfs" hidden>
+                    <article class="calculator-panel" id="etfs-calculators" data-calculator-panel="etfs" hidden>
                         <div class="calculator-panel__header">
                             <span>ETFs</span>
-                            <h3>ETF price, cost, dividend, tracking, and allocation calculators.</h3>
+                            <h2>ETF price, cost, dividend, tracking, and allocation calculators.</h2>
                         </div>
                         <div class="calculator-group-grid">
                             <section class="calculator-group">
@@ -405,11 +437,18 @@
 
     <!-- Site Footer -->
     <footer class="site-footer">
-        <div class="container">
-            <p>&copy; <span id="year"></span> StockMarketWave. Educational tools only; not financial advice.</p>
+        <div class="container site-footer__inner">
+            <p>&copy; <span id="year"></span> StockMarketWave. Educational tools only not financial advice</p>
+            <nav class="site-footer__links" aria-label="Footer navigation">
+                <a href="/about.html">About</a>
+                <a href="/contact.html">Contact</a>
+                <a href="/privacy-policy.html">Privacy Policy</a>
+                <a href="/terms.html">Terms</a>
+                <a href="/disclaimer.html">Disclaimer</a>
+            </nav>
         </div>
     </footer>
 
-    <script src="/script.js?v=20260619c" defer></script>
+    <script src="/script.js?v=20260623j" defer></script>
 </body>
 </html>

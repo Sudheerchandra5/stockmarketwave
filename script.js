@@ -27,6 +27,12 @@
         }
     };
 
+    const normalizeHomeUrl = () => {
+        if (window.location.pathname.endsWith("/index.html")) {
+            window.history.replaceState({}, "", `${window.location.origin}/${window.location.search}${window.location.hash}`);
+        }
+    };
+
     const setHeaderScrollState = () => {
         const header = document.querySelector(selectors.header);
 
@@ -515,7 +521,13 @@
         };
 
         const params = new URLSearchParams(window.location.search);
-        const requestedCategory = params.get("category") || window.location.hash.replace("#", "");
+        const hashCategoryMap = {
+            "stocks-calculators": "stocks",
+            "mutual-funds-calculators": "mutual-funds",
+            "etfs-calculators": "etfs",
+        };
+        const hashValue = window.location.hash.replace("#", "");
+        const requestedCategory = params.get("category") || hashCategoryMap[hashValue] || hashValue;
         const hasRequestedCategory = tabs.some((tab) => tab.dataset.calculatorTab === requestedCategory);
 
         if (hasRequestedCategory) {
@@ -535,6 +547,7 @@
     };
 
     const initializeApp = () => {
+        normalizeHomeUrl();
         setFooterYear();
         setHeaderScrollState();
         initializeCalculatorTabs();

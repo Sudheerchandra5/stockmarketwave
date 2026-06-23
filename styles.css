@@ -166,8 +166,16 @@ p {
     padding-block-start: clamp(var(--space-10), 10vw, 7rem);
 }
 
+.hero.page-section--hero {
+    padding-block: clamp(var(--space-8), 7vw, var(--space-16));
+}
+
 .calculator-detail.page-section--hero {
     padding-block: clamp(var(--space-8), 6vw, var(--space-12));
+}
+
+.calculators.page-section--hero {
+    padding-block: clamp(var(--space-6), 5vw, var(--space-10));
 }
 
 .site-header {
@@ -501,7 +509,7 @@ p {
 
 .site-footer {
     border-top: 1px solid var(--color-border);
-    padding-block: var(--space-6);
+    padding-block: var(--space-5);
     color: var(--color-muted);
     text-align: center;
     background: var(--color-surface);
@@ -874,9 +882,9 @@ html[data-calculator-category="etfs"] .calculator-tab:not([data-calculator-tab="
 }
 
 .formula-details summary {
-    display: flex;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    justify-content: space-between;
     gap: var(--space-4);
     cursor: pointer;
     list-style: none;
@@ -889,7 +897,8 @@ html[data-calculator-category="etfs"] .calculator-tab:not([data-calculator-tab="
 .formula-details summary::after {
     content: "+";
     display: grid;
-    flex: 0 0 auto;
+    grid-column: 2;
+    grid-row: 1 / span 2;
     width: 2rem;
     height: 2rem;
     place-items: center;
@@ -905,15 +914,23 @@ html[data-calculator-category="etfs"] .calculator-tab:not([data-calculator-tab="
 }
 
 .formula-details summary span {
+    grid-column: 1;
+    grid-row: 1;
     margin-bottom: var(--space-1);
 }
 
 .formula-details summary strong {
     display: block;
+    grid-column: 1;
+    grid-row: 2;
     color: var(--color-text);
     font-size: clamp(1.25rem, 4vw, 1.55rem);
     letter-spacing: -0.04em;
     line-height: 1.1;
+}
+
+.formula-details[open] .formula-stack {
+    margin-top: var(--space-4);
 }
 
 .form-grid {
@@ -1086,6 +1103,268 @@ html[data-calculator-category="etfs"] .calculator-tab:not([data-calculator-tab="
     background: var(--color-bg-soft);
 }
 
+/* Crawlability and Content Helpers */
+
+.breadcrumb {
+    width: 100%;
+    margin: var(--space-2) 0 var(--space-4);
+    padding-inline: clamp(var(--space-3), 2vw, var(--space-6));
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.breadcrumb li {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.breadcrumb li + li::before {
+    content: "/";
+    color: var(--color-border);
+}
+
+.breadcrumb a {
+    color: var(--color-muted);
+}
+
+.breadcrumb a:hover {
+    color: var(--color-primary);
+}
+
+.popular-calculators {
+    padding-block-start: 0;
+}
+
+.popular-calculator-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+}
+
+.popular-calculator-grid a {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    color: var(--color-text);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    font-weight: 900;
+    transition: color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.popular-calculator-grid a:hover {
+    border-color: rgba(15, 118, 110, 0.45);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.faq-section {
+    padding-block-start: 0;
+}
+
+.faq-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: clamp(var(--space-5), 4vw, var(--space-8));
+    background: var(--color-surface);
+    box-shadow: var(--shadow-md);
+}
+
+.faq-card > span {
+    display: inline-flex;
+    margin-bottom: var(--space-2);
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.faq-card h2 {
+    margin-bottom: var(--space-5);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.faq-list {
+    display: grid;
+    gap: var(--space-3);
+}
+
+.faq-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+    background: var(--color-bg);
+}
+
+.faq-item summary {
+    cursor: pointer;
+    color: var(--color-text);
+    font-weight: 900;
+}
+
+.faq-item p {
+    margin: var(--space-3) 0 0;
+}
+
+.content-hero {
+    padding-block: clamp(var(--space-8), 6vw, var(--space-12));
+}
+
+.content-section,
+.calculator-insights-section {
+    padding-block-start: 0;
+}
+
+.content-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: var(--space-5);
+}
+
+.content-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: clamp(var(--space-5), 4vw, var(--space-6));
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+}
+
+.content-card h2 {
+    margin-bottom: var(--space-3);
+    font-size: clamp(1.25rem, 3vw, 1.65rem);
+}
+
+.content-card p {
+    margin-bottom: 0;
+}
+
+.article-layout {
+    display: grid;
+    gap: clamp(var(--space-6), 4vw, var(--space-10));
+    align-items: start;
+}
+
+.article-content {
+    display: grid;
+    gap: var(--space-5);
+}
+
+.article-block {
+    position: relative;
+}
+
+.article-block::before {
+    content: "";
+    position: absolute;
+    inset: var(--space-5) auto var(--space-5) 0;
+    width: 0.25rem;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(180deg, var(--color-primary), var(--color-accent));
+    opacity: 0.8;
+}
+
+.article-block h2,
+.article-block p {
+    padding-left: var(--space-3);
+}
+
+.article-related {
+    align-self: start;
+}
+
+.guide-preview-section {
+    padding-block-start: 0;
+}
+
+.guide-link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+}
+
+.guide-link-card {
+    display: grid;
+    gap: var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    color: var(--color-text);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    transition: border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.guide-link-card:hover {
+    border-color: rgba(15, 118, 110, 0.45);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.guide-link-card span {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+.calculator-guides-callout {
+    display: grid;
+    gap: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: clamp(var(--space-5), 4vw, var(--space-6));
+    background: linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(37, 99, 235, 0.08));
+}
+
+.calculator-guides-callout h2 {
+    margin-bottom: var(--space-3);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.calculator-guides-callout p:last-child {
+    margin-bottom: 0;
+}
+
+.site-footer__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+}
+
+.site-footer__links {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    gap: var(--space-2);
+    font-size: 0.8rem;
+    font-weight: 800;
+}
+
+.site-footer__links a {
+    color: var(--color-muted);
+    white-space: nowrap;
+    transition: color var(--transition-fast);
+}
+
+.site-footer__links a:hover {
+    color: var(--color-primary);
+}
+
 /* ==========================================================================
    06. Responsive Rules
    Mobile-first breakpoints for dynamic screen-based layouts.
@@ -1128,8 +1407,20 @@ html[data-calculator-category="etfs"] .calculator-tab:not([data-calculator-tab="
     }
 
     .calculator-guide-grid {
-        grid-template-columns: minmax(0, 0.95fr) minmax(17rem, 0.65fr);
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
         align-items: start;
+    }
+}
+
+@media (max-width: 48rem) {
+    .site-footer__inner {
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+
+    .site-footer__links {
+        flex-wrap: wrap;
+        gap: var(--space-3) var(--space-4);
     }
 }
 
@@ -1154,6 +1445,10 @@ html[data-calculator-category="etfs"] .calculator-tab:not([data-calculator-tab="
     .calculator-workspace {
         grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
         align-items: start;
+    }
+
+    .article-layout {
+        grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
     }
 }
 
