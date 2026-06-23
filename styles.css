@@ -166,6 +166,10 @@ p {
     padding-block-start: clamp(var(--space-10), 10vw, 7rem);
 }
 
+.hero.page-section--hero {
+    padding-block: clamp(var(--space-8), 7vw, var(--space-16));
+}
+
 .calculator-detail.page-section--hero {
     padding-block: clamp(var(--space-8), 6vw, var(--space-12));
 }

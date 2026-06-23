@@ -27,6 +27,12 @@
         }
     };
 
+    const normalizeHomeUrl = () => {
+        if (window.location.pathname.endsWith("/index.html")) {
+            window.history.replaceState({}, "", `${window.location.origin}/${window.location.search}${window.location.hash}`);
+        }
+    };
+
     const setHeaderScrollState = () => {
         const header = document.querySelector(selectors.header);
 
@@ -541,6 +547,7 @@
     };
 
     const initializeApp = () => {
+        normalizeHomeUrl();
         setFooterYear();
         setHeaderScrollState();
         initializeCalculatorTabs();
