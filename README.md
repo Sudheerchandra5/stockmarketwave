@@ -67,6 +67,8 @@ For Hostinger file manager, upload:
 - `calculators/`
 - `styles.css`
 - `script.js`
+- `robots.txt`
+- `sitemap.xml`
 
 Make sure the final structure in `public_html` is:
 
@@ -77,7 +79,9 @@ public_html/
 ├── calculators/
 │   └── calculator detail pages...
 ├── styles.css
-└── script.js
+├── script.js
+├── robots.txt
+└── sitemap.xml
 ```
 
 ## Disclaimer
