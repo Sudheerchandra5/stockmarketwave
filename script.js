@@ -515,7 +515,13 @@
         };
 
         const params = new URLSearchParams(window.location.search);
-        const requestedCategory = params.get("category") || window.location.hash.replace("#", "");
+        const hashCategoryMap = {
+            "stocks-calculators": "stocks",
+            "mutual-funds-calculators": "mutual-funds",
+            "etfs-calculators": "etfs",
+        };
+        const hashValue = window.location.hash.replace("#", "");
+        const requestedCategory = params.get("category") || hashCategoryMap[hashValue] || hashValue;
         const hasRequestedCategory = tabs.some((tab) => tab.dataset.calculatorTab === requestedCategory);
 
         if (hasRequestedCategory) {

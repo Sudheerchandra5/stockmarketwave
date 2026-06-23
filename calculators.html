@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Browse free online investment calculators for stocks, mutual funds, ETFs, SIP, SWP, STP, returns, dividends, risk, tax, and portfolio planning.">
     <title>Free Investment Calculators | Stocks, Funds & ETFs</title>
-    <link rel="stylesheet" href="/styles.css?v=20260619c">
+    <link rel="stylesheet" href="/styles.css?v=20260623">
     <script>
         document.documentElement.dataset.calculatorCategory =
             new URLSearchParams(window.location.search).get("category") ||
@@ -100,7 +100,7 @@
                 </div>
 
                 <div class="calculator-panels">
-                    <article class="calculator-panel is-active" data-calculator-panel="stocks">
+                    <article class="calculator-panel is-active" id="stocks-calculators" data-calculator-panel="stocks">
                         <div class="calculator-panel__header">
                             <span>Stocks</span>
                             <h3>Trading, investing, valuation, and portfolio calculators.</h3>
@@ -212,7 +212,7 @@
                         </div>
                     </article>
 
-                    <article class="calculator-panel" data-calculator-panel="mutual-funds" hidden>
+                    <article class="calculator-panel" id="mutual-funds-calculators" data-calculator-panel="mutual-funds" hidden>
                         <div class="calculator-panel__header">
                             <span>Mutual Funds</span>
                             <h3>SIP, SWP, STP, tax, goals, and fund analysis calculators.</h3>
@@ -306,7 +306,7 @@
                         </div>
                     </article>
 
-                    <article class="calculator-panel" data-calculator-panel="etfs" hidden>
+                    <article class="calculator-panel" id="etfs-calculators" data-calculator-panel="etfs" hidden>
                         <div class="calculator-panel__header">
                             <span>ETFs</span>
                             <h3>ETF price, cost, dividend, tracking, and allocation calculators.</h3>
@@ -410,6 +410,6 @@
         </div>
     </footer>
 
-    <script src="/script.js?v=20260619c" defer></script>
+    <script src="/script.js?v=20260623" defer></script>
 </body>
 </html>
