@@ -11,9 +11,10 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     <meta name="description" content="Browse free online investment calculators for stocks, mutual funds, ETFs, SIP, SWP, STP, returns, dividends, risk, tax, and portfolio planning.">
     <title>Free Investment Calculators | Stocks, Funds & ETFs</title>
-    <link rel="stylesheet" href="/styles.css?v=20260623i">
+    <link rel="stylesheet" href="/styles.css?v=20260623k">
     <script>
         document.documentElement.dataset.calculatorCategory =
             new URLSearchParams(window.location.search).get("category") ||
@@ -40,7 +41,8 @@
             </a>
 
             <ul class="site-nav__menu" id="primary-menu" data-nav-menu>
-                <li><a href="/calculators.html" aria-current="page">Calculators</a></li>
+                <li><a href="/calculators.html">Calculators</a></li>
+                <li><a href="/guides.html">Guides</a></li>
             </ul>
         </nav>
     </header>
@@ -106,6 +108,28 @@
                         </article>
                     </div>
                 </div>
+
+                <section class="calculator-guides-callout" aria-labelledby="calculator-guides-title">
+                    <div>
+                        <p class="eyebrow">Guides</p>
+                        <h2 id="calculator-guides-title">Need help choosing the right calculator?</h2>
+                        <p>Use these guides to understand formulas, assumptions, and common mistakes before calculating.</p>
+                    </div>
+                    <div class="guide-link-grid">
+                        <a class="guide-link-card" href="/guides/how-to-calculate-stock-profit.html">
+                            <strong>Stock profit guide</strong>
+                            <span>Profit, ROI, fees, and break-even basics.</span>
+                        </a>
+                        <a class="guide-link-card" href="/guides/swp-calculator-guide.html">
+                            <strong>SWP guide</strong>
+                            <span>Plan withdrawals and corpus sustainability.</span>
+                        </a>
+                        <a class="guide-link-card" href="/guides/expense-ratio-impact.html">
+                            <strong>Expense ratio guide</strong>
+                            <span>See how fund costs affect long-term value.</span>
+                        </a>
+                    </div>
+                </section>
 
                 <div class="calculator-panels">
                     <article class="calculator-panel is-active" id="stocks-calculators" data-calculator-panel="stocks">
@@ -416,6 +440,7 @@
         <div class="container site-footer__inner">
             <p>&copy; <span id="year"></span> StockMarketWave. Educational tools only not financial advice</p>
             <nav class="site-footer__links" aria-label="Footer navigation">
+                <a href="/guides.html">Guides</a>
                 <a href="/about.html">About</a>
                 <a href="/contact.html">Contact</a>
                 <a href="/privacy-policy.html">Privacy Policy</a>
@@ -425,6 +450,6 @@
         </div>
     </footer>
 
-    <script src="/script.js?v=20260623h" defer></script>
+    <script src="/script.js?v=20260623j" defer></script>
 </body>
 </html>

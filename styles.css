@@ -1231,7 +1231,7 @@ html[data-calculator-category="etfs"] .calculator-tab:not([data-calculator-tab="
 .content-card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-    gap: var(--space-4);
+    gap: var(--space-5);
 }
 
 .content-card {
@@ -1251,6 +1251,94 @@ html[data-calculator-category="etfs"] .calculator-tab:not([data-calculator-tab="
     margin-bottom: 0;
 }
 
+.article-layout {
+    display: grid;
+    gap: clamp(var(--space-6), 4vw, var(--space-10));
+    align-items: start;
+}
+
+.article-content {
+    display: grid;
+    gap: var(--space-5);
+}
+
+.article-block {
+    position: relative;
+}
+
+.article-block::before {
+    content: "";
+    position: absolute;
+    inset: var(--space-5) auto var(--space-5) 0;
+    width: 0.25rem;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(180deg, var(--color-primary), var(--color-accent));
+    opacity: 0.8;
+}
+
+.article-block h2,
+.article-block p {
+    padding-left: var(--space-3);
+}
+
+.article-related {
+    align-self: start;
+}
+
+.guide-preview-section {
+    padding-block-start: 0;
+}
+
+.guide-link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+}
+
+.guide-link-card {
+    display: grid;
+    gap: var(--space-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-5);
+    color: var(--color-text);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    transition: border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.guide-link-card:hover {
+    border-color: rgba(15, 118, 110, 0.45);
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.guide-link-card span {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.6;
+}
+
+.calculator-guides-callout {
+    display: grid;
+    gap: var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: clamp(var(--space-5), 4vw, var(--space-6));
+    background: linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(37, 99, 235, 0.08));
+}
+
+.calculator-guides-callout h2 {
+    margin-bottom: var(--space-3);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.calculator-guides-callout p:last-child {
+    margin-bottom: 0;
+}
+
 .site-footer__inner {
     display: flex;
     align-items: center;
@@ -1262,8 +1350,8 @@ html[data-calculator-category="etfs"] .calculator-tab:not([data-calculator-tab="
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-end;
-    gap: var(--space-3);
-    font-size: 0.85rem;
+    gap: var(--space-2);
+    font-size: 0.8rem;
     font-weight: 800;
 }
 
@@ -1357,6 +1445,10 @@ html[data-calculator-category="etfs"] .calculator-tab:not([data-calculator-tab="
     .calculator-workspace {
         grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
         align-items: start;
+    }
+
+    .article-layout {
+        grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
     }
 }
 
