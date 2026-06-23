@@ -60,16 +60,14 @@
                     <p class="eyebrow">Stocks calculator</p>
                     <h1 id="calculator-title">Stock Profit / Loss Calculator</h1>
                     <p>
-                        Enter your buy price, sell price, share quantity, and charges to estimate
-                        profit or loss, ROI, total cost, total proceeds, and break-even sell price.
+                        Select trade type, enter prices, share quantity, and your brokerage fee to automatically calculate Indian government taxes (STT, SEBI, Exchange, Stamp Duty, GST) and find your exact net profit.
                     </p>
                 </div>
 
                 <aside class="calculator-note-card">
-                    <span>Manual input first</span>
+                    <span>Auto-calculates Indian Taxes</span>
                     <p>
-                        This calculator does not need live market data. Use the prices from your
-                        broker, exchange, or research source, then adjust fees if needed.
+                        This tool automatically calculates the exact 2026 rates for STT, SEBI fees, Exchange Charges, Stamp Duty, and GST based on whether you select Delivery or Intraday.
                     </p>
                 </aside>
             </div>
@@ -86,6 +84,16 @@
                     </div>
 
                     <div class="form-grid">
+                        <label class="field" style="grid-column: 1 / -1;">
+                            <span>Trade type</span>
+                            <select name="tradeType">
+                                <option value="delivery" selected>Delivery (Equity)</option>
+                                <option value="intraday">Intraday (Equity)</option>
+                                <option value="futures">Futures (F&O)</option>
+                                <option value="options">Options (F&O)</option>
+                            </select>
+                        </label>
+
                         <label class="field">
                             <span>Buy price per share</span>
                             <input type="number" name="buyPrice" min="0" step="0.01" value="120" inputmode="decimal" required>
@@ -102,13 +110,16 @@
                         </label>
 
                         <label class="field">
-                            <span>Buy charges / fees</span>
-                            <input type="number" name="buyFees" min="0" step="0.01" value="0" inputmode="decimal">
+                            <span>Exchange</span>
+                            <select name="exchange">
+                                <option value="nse" selected>NSE</option>
+                                <option value="bse">BSE</option>
+                            </select>
                         </label>
 
                         <label class="field">
-                            <span>Sell charges / fees</span>
-                            <input type="number" name="sellFees" min="0" step="0.01" value="0" inputmode="decimal">
+                            <span>Brokerage (Buy + Sell)</span>
+                            <input type="number" name="brokerage" min="0" step="0.01" value="0" inputmode="decimal">
                         </label>
                     </div>
 
@@ -126,37 +137,55 @@
 
                     <div class="result-card-grid">
                         <article class="result-card result-card--primary">
-                            <span>Profit / Loss</span>
-                            <strong data-stock-profit-output="profitLoss">550.00</strong>
+                            <span>Net Profit / Loss</span>
+                            <strong data-stock-profit-output="profitLoss">0.00</strong>
                         </article>
                         <article class="result-card">
                             <span>ROI</span>
-                            <strong data-stock-profit-output="roi">18.33%</strong>
+                            <strong data-stock-profit-output="roi">0.00%</strong>
                         </article>
                         <article class="result-card">
-                            <span>Total cost</span>
-                            <strong data-stock-profit-output="totalCost">3,000.00</strong>
+                            <span>Investment Value</span>
+                            <strong data-stock-profit-output="investment">0.00</strong>
                         </article>
                         <article class="result-card">
-                            <span>Total proceeds</span>
-                            <strong data-stock-profit-output="totalProceeds">3,550.00</strong>
+                            <span>Sale Value</span>
+                            <strong data-stock-profit-output="saleValue">0.00</strong>
                         </article>
                         <article class="result-card">
                             <span>Break-even sell price</span>
-                            <strong data-stock-profit-output="breakEven">120.00</strong>
+                            <strong data-stock-profit-output="breakEven">0.00</strong>
                         </article>
                     </div>
 
-                    <div class="comparison-chart" aria-label="Invested amount versus proceeds">
-                        <div class="comparison-chart__bar">
-                            <span>Cost</span>
-                            <div><i data-stock-profit-bar="cost"></i></div>
-                            <strong data-stock-profit-output="chartCost">3,000.00</strong>
+                    <div class="formula-stack" style="margin-top: 1rem; margin-bottom: 1rem;">
+                        <div class="formula-row" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>Brokerage</span>
+                            <code data-stock-profit-output="brkBreakdown">0.00</code>
                         </div>
-                        <div class="comparison-chart__bar comparison-chart__bar--accent">
-                            <span>Proceeds</span>
-                            <div><i data-stock-profit-bar="proceeds"></i></div>
-                            <strong data-stock-profit-output="chartProceeds">3,550.00</strong>
+                        <div class="formula-row" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>STT (Securities Transaction Tax)</span>
+                            <code data-stock-profit-output="stt">0.00</code>
+                        </div>
+                        <div class="formula-row" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>Exchange Charges (<span data-stock-profit-output="exchangeLabel">NSE</span>)</span>
+                            <code data-stock-profit-output="exchange">0.00</code>
+                        </div>
+                        <div class="formula-row" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>SEBI Turnover Fees</span>
+                            <code data-stock-profit-output="sebi">0.00</code>
+                        </div>
+                        <div class="formula-row" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>Stamp Duty</span>
+                            <code data-stock-profit-output="stamp">0.00</code>
+                        </div>
+                        <div class="formula-row" style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>GST (18%)</span>
+                            <code data-stock-profit-output="gst">0.00</code>
+                        </div>
+                        <div class="formula-row" style="display: flex; justify-content: space-between; align-items: center; background: rgba(15, 118, 110, 0.08); border: 1px solid rgba(15, 118, 110, 0.35);">
+                            <span style="font-weight: 800; color: var(--color-primary);">Total Charges & Taxes</span>
+                            <code data-stock-profit-output="totalCharges" style="color: var(--color-primary);">0.00</code>
                         </div>
                     </div>
                 </section>
@@ -173,20 +202,20 @@
                     </summary>
                     <div class="formula-stack">
                         <div class="formula-row">
+                            <span>Indian Statutory Charges</span>
+                            <code>STT, Stamp Duty, SEBI, Exchange, GST</code>
+                        </div>
+                        <div class="formula-row">
                             <span>Total cost</span>
-                            <code>(Buy price x Shares) + Buy charges</code>
+                            <code>(Buy price x Shares) + Total Charges</code>
                         </div>
                         <div class="formula-row">
-                            <span>Total proceeds</span>
-                            <code>(Sell price x Shares) - Sell charges</code>
-                        </div>
-                        <div class="formula-row">
-                            <span>Profit / loss</span>
-                            <code>Total proceeds - Total cost</code>
+                            <span>Net Profit / loss</span>
+                            <code>(Sell price x Shares) - Total cost</code>
                         </div>
                         <div class="formula-row">
                             <span>ROI</span>
-                            <code>(Profit or loss / Total cost) x 100</code>
+                            <code>(Net Profit / Total cost) x 100</code>
                         </div>
                         <div class="formula-row">
                             <span>Break-even sell price</span>
@@ -247,7 +276,7 @@
     <!-- Site Footer -->
     <footer class="site-footer">
         <div class="container site-footer__inner">
-            <p>&copy; <span id="year"></span> StockMarketWave. Educational tools only not financial advice</p>
+            <p>&copy; <span id="year"></span> StockMarketWave</p>
             <nav class="site-footer__links" aria-label="Footer navigation">
                 <a href="/about.html">About</a>
                 <a href="/contact.html">Contact</a>

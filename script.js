@@ -1,3 +1,222 @@
+// ============================================================================
+// Pure calculation helpers
+// Kept at module top level so they can be unit tested in Node and reused in the browser.
+// ============================================================================
+
+function formatNumber(value, options = {}) {
+    const formatter = new Intl.NumberFormat("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+        ...options,
+    });
+
+    return formatter.format(Number.isFinite(value) ? value : 0);
+}
+
+function computeStockProfit({ buyPrice = 0, sellPrice = 0, shares = 0, brokerage = 0, tradeType = "delivery", exchange = "nse" } = {}) {
+    const buyTurnover = buyPrice * shares;
+    const sellTurnover = sellPrice * shares;
+    const totalTurnover = buyTurnover + sellTurnover;
+
+    // Equity transaction charge rates differ by exchange
+    const equityExchangeRate = exchange === "bse" ? 0.0000375 : 0.0000297;
+
+    let stt = 0;
+    let stampDuty = 0;
+    let exchangeCharges = 0;
+
+    if (tradeType === "delivery") {
+        stt = (buyTurnover * 0.001) + (sellTurnover * 0.001);
+        stampDuty = buyTurnover * 0.00015;
+        exchangeCharges = totalTurnover * equityExchangeRate;
+    } else if (tradeType === "intraday") {
+        stt = sellTurnover * 0.00025;
+        stampDuty = buyTurnover * 0.00003;
+        exchangeCharges = totalTurnover * equityExchangeRate;
+    } else if (tradeType === "futures") {
+        stt = sellTurnover * 0.0005; // 0.05% on sell side
+        stampDuty = buyTurnover * 0.00002; // 0.002% on buy side
+        exchangeCharges = totalTurnover * 0.0000173; // ~0.00173% for futures
+    } else if (tradeType === "options") {
+        stt = sellTurnover * 0.0015; // 0.15% on sell side premium
+        stampDuty = buyTurnover * 0.00003; // 0.003% on buy side premium
+        exchangeCharges = totalTurnover * 0.0003503; // ~0.03503% for options premium
+    }
+
+    // STT is rounded to the nearest rupee as levied in India
+    stt = Math.round(stt);
+
+    const sebiFees = totalTurnover * 0.000001;
+    const gst = (brokerage + exchangeCharges + sebiFees) * 0.18;
+
+    const totalCharges = brokerage + stt + exchangeCharges + sebiFees + stampDuty + gst;
+
+    const profitLoss = sellTurnover - buyTurnover - totalCharges;
+    const totalCost = buyTurnover + totalCharges;
+    const roi = totalCost > 0 ? (profitLoss / totalCost) * 100 : 0;
+    const breakEven = shares > 0 ? (buyTurnover + totalCharges) / shares : 0;
+
+    return {
+        buyTurnover,
+        sellTurnover,
+        totalTurnover,
+        brokerage,
+        stt,
+        exchangeCharges,
+        sebiFees,
+        stampDuty,
+        gst,
+        totalCharges,
+        profitLoss,
+        totalCost,
+        roi,
+        breakEven,
+    };
+}
+
+function computeStockAverage({ shares1 = 0, price1 = 0, shares2 = 0, price2 = 0, shares3 = 0, price3 = 0, fees = 0 } = {}) {
+    const lots = [
+        { shares: shares1, price: price1 },
+        { shares: shares2, price: price2 },
+        { shares: shares3, price: price3 },
+    ];
+    const totalShares = lots.reduce((sum, lot) => sum + lot.shares, 0);
+    const grossCost = lots.reduce((sum, lot) => sum + (lot.shares * lot.price), 0);
+    const totalCost = grossCost + fees;
+    const averagePrice = totalShares > 0 ? totalCost / totalShares : 0;
+
+    return { averagePrice, totalShares, totalCost, fees };
+}
+
+function computeStockBreakeven({ buyPrice = 0, shares = 0, buyFees = 0, sellFees = 0 } = {}) {
+    const totalCost = (buyPrice * shares) + buyFees;
+    const totalFees = buyFees + sellFees;
+    const requiredProceeds = totalCost + sellFees;
+    const breakEven = shares > 0 ? requiredProceeds / shares : 0;
+
+    return { breakEven, totalCost, totalFees, requiredProceeds };
+}
+
+function computeRoi({ initial = 0, final = 0, income = 0, fees = 0 } = {}) {
+    const totalReturn = final + income - fees;
+    const gain = totalReturn - initial;
+    const roi = initial > 0 ? (gain / initial) * 100 : 0;
+
+    return { roi, gain, totalReturn, fees };
+}
+
+function computeTotalReturn({ initial = 0, ending = 0, income = 0, fees = 0 } = {}) {
+    const netEnding = ending + income - fees;
+    const gain = netEnding - initial;
+    const returnPct = initial > 0 ? (gain / initial) * 100 : 0;
+
+    return { returnPct, gain, netEnding, income };
+}
+
+function computeCagr({ beginning = 0, ending = 0, years = 0 } = {}) {
+    const gain = ending - beginning;
+    const totalReturn = beginning > 0 ? (gain / beginning) * 100 : 0;
+    const cagr = beginning > 0 && ending > 0 && years > 0
+        ? ((ending / beginning) ** (1 / years) - 1) * 100
+        : 0;
+
+    return { cagr, gain, totalReturn, years };
+}
+
+function computeCapitalGains({ saleValue = 0, purchaseValue = 0, fees = 0, otherCosts = 0 } = {}) {
+    const costs = fees + otherCosts;
+    const costBasis = purchaseValue + costs;
+    const gain = saleValue - costBasis;
+
+    return { gain, costBasis, saleValue, costs };
+}
+
+function computeAfterTax({ profit = 0, investment = 0, taxRate = 0, fees = 0 } = {}) {
+    const taxableProfit = Math.max(profit, 0);
+    const tax = taxableProfit * (taxRate / 100);
+    const afterTaxProfit = profit - tax - fees;
+    const returnPct = investment > 0 ? (afterTaxProfit / investment) * 100 : 0;
+
+    return { returnPct, afterTaxProfit, tax, fees };
+}
+
+function computeBrokerageCharges({ buyTurnover = 0, sellTurnover = 0, brokerage = 0, exchangeCharges = 0, taxes = 0, otherCharges = 0 } = {}) {
+    const totalTurnover = buyTurnover + sellTurnover;
+    const totalCharges = brokerage + exchangeCharges + taxes + otherCharges;
+    const chargeRate = totalTurnover > 0 ? (totalCharges / totalTurnover) * 100 : 0;
+    const netProceeds = sellTurnover - totalCharges;
+
+    return { totalCharges, totalTurnover, chargeRate, netProceeds };
+}
+
+function computeIntradayTrade({ buyPrice = 0, sellPrice = 0, quantity = 0, charges = 0, marginUsed = 0 } = {}) {
+    const grossProfit = (sellPrice - buyPrice) * quantity;
+    const netProfit = grossProfit - charges;
+    const roi = marginUsed > 0 ? (netProfit / marginUsed) * 100 : 0;
+    const turnover = (buyPrice + sellPrice) * quantity;
+
+    return { netProfit, grossProfit, roi, turnover };
+}
+
+function computeDeliveryTrade({ buyPrice = 0, sellPrice = 0, quantity = 0, charges = 0, days = 0 } = {}) {
+    const totalCost = buyPrice * quantity;
+    const netProfit = ((sellPrice - buyPrice) * quantity) - charges;
+    const roi = totalCost > 0 ? (netProfit / totalCost) * 100 : 0;
+    const annualized = days > 0 ? roi * (365 / days) : 0;
+
+    return { netProfit, roi, totalCost, annualized };
+}
+
+function computeBidAskSpread({ bid = 0, ask = 0, quantity = 0 } = {}) {
+    const spread = Math.max(ask - bid, 0);
+    const mid = (ask + bid) / 2;
+    const spreadCost = spread * quantity;
+    const spreadPct = mid > 0 ? (spread / mid) * 100 : 0;
+
+    return { spreadCost, spread, mid, spreadPct };
+}
+
+// Generic expression engine that powers the data-driven formula calculators.
+function evaluateFormula(expression, values = {}) {
+    const names = Object.keys(values);
+    const args = names.map((name) => values[name]);
+    const fn = new Function("Math", ...names, `"use strict"; return (${expression});`);
+    const result = fn(Math, ...args);
+    return Number.isFinite(result) ? result : 0;
+}
+
+function formatFormulaValue(value, format) {
+    if (format === "percent") {
+        return `${formatNumber(value)}%`;
+    }
+
+    if (format === "integer") {
+        return formatNumber(value, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    }
+
+    return formatNumber(value);
+}
+
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = {
+        formatNumber,
+        computeStockProfit,
+        computeStockAverage,
+        computeStockBreakeven,
+        computeRoi,
+        computeTotalReturn,
+        computeCagr,
+        computeCapitalGains,
+        computeAfterTax,
+        computeBrokerageCharges,
+        computeIntradayTrade,
+        computeDeliveryTrade,
+        computeBidAskSpread,
+        evaluateFormula,
+        formatFormulaValue,
+    };
+}
+
 (() => {
     const selectors = {
         header: "[data-site-header]",
@@ -41,16 +260,6 @@
         }
 
         header.classList.toggle(stateClasses.headerScrolled, window.scrollY > 8);
-    };
-
-    const formatNumber = (value, options = {}) => {
-        const formatter = new Intl.NumberFormat("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-            ...options,
-        });
-
-        return formatter.format(Number.isFinite(value) ? value : 0);
     };
 
     const bindResetToDefaults = (form, calculate) => {
@@ -184,26 +393,51 @@
             const buyPrice = getNumber("buyPrice");
             const sellPrice = getNumber("sellPrice");
             const shares = getNumber("shares");
-            const buyFees = getNumber("buyFees");
-            const sellFees = getNumber("sellFees");
-            const totalFees = buyFees + sellFees;
+            const brokerage = getNumber("brokerage");
+            const tradeType = form.elements["tradeType"]?.value || "delivery";
+            const exchange = form.elements["exchange"]?.value || "nse";
 
-            const grossCost = buyPrice * shares;
-            const totalCost = grossCost + buyFees;
-            const totalProceeds = sellPrice * shares - sellFees;
-            const profitLoss = totalProceeds - totalCost;
-            const roi = totalCost > 0 ? (profitLoss / totalCost) * 100 : 0;
-            const breakEven = shares > 0 ? (grossCost + totalFees) / shares : 0;
+            const {
+                buyTurnover,
+                sellTurnover,
+                stt,
+                exchangeCharges,
+                sebiFees,
+                stampDuty,
+                gst,
+                totalCharges,
+                profitLoss,
+                totalCost,
+                roi,
+                breakEven,
+            } = computeStockProfit({ buyPrice, sellPrice, shares, brokerage, tradeType, exchange });
 
             setOutput("profitLoss", formatNumber(profitLoss));
             setOutput("roi", `${formatNumber(roi)}%`);
-            setOutput("totalCost", formatNumber(totalCost));
-            setOutput("totalProceeds", formatNumber(totalProceeds));
+            setOutput("investment", formatNumber(buyTurnover));
+            setOutput("saleValue", formatNumber(sellTurnover));
             setOutput("breakEven", formatNumber(breakEven));
             setOutput("chartCost", formatNumber(totalCost));
-            setOutput("chartProceeds", formatNumber(totalProceeds));
-            updateChartBars(totalCost, totalProceeds);
+            setOutput("chartProceeds", formatNumber(sellTurnover));
+            updateChartBars(totalCost, sellTurnover);
+
+            setOutput("brkBreakdown", formatNumber(brokerage));
+            setOutput("stt", formatNumber(stt));
+            setOutput("exchange", formatNumber(exchangeCharges));
+            setOutput("exchangeLabel", exchange.toUpperCase());
+            setOutput("sebi", formatNumber(sebiFees));
+            setOutput("stamp", formatNumber(stampDuty));
+            setOutput("gst", formatNumber(gst));
+            setOutput("totalCharges", formatNumber(totalCharges));
         };
+
+        // Listen for real-time changes on the dropdowns
+        if (form.elements["tradeType"]) {
+            form.elements["tradeType"].addEventListener("change", calculate);
+        }
+        if (form.elements["exchange"]) {
+            form.elements["exchange"].addEventListener("change", calculate);
+        }
 
         form.addEventListener("submit", (event) => {
             event.preventDefault();
@@ -252,15 +486,15 @@
 
     const initializeStockBatchCalculators = () => {
         bindCalculatorForm("[data-stock-average-form]", "data-stock-average-output", ({ getNumber, setOutput }) => {
-            const lots = [1, 2, 3].map((index) => ({
-                shares: getNumber(`shares${index}`),
-                price: getNumber(`price${index}`),
-            }));
-            const fees = getNumber("fees");
-            const totalShares = lots.reduce((sum, lot) => sum + lot.shares, 0);
-            const grossCost = lots.reduce((sum, lot) => sum + (lot.shares * lot.price), 0);
-            const totalCost = grossCost + fees;
-            const averagePrice = totalShares > 0 ? totalCost / totalShares : 0;
+            const { averagePrice, totalShares, totalCost, fees } = computeStockAverage({
+                shares1: getNumber("shares1"),
+                price1: getNumber("price1"),
+                shares2: getNumber("shares2"),
+                price2: getNumber("price2"),
+                shares3: getNumber("shares3"),
+                price3: getNumber("price3"),
+                fees: getNumber("fees"),
+            });
 
             setOutput("averagePrice", formatNumber(averagePrice));
             setOutput("totalShares", formatNumber(totalShares, { maximumFractionDigits: 0, minimumFractionDigits: 0 }));
@@ -269,14 +503,12 @@
         });
 
         bindCalculatorForm("[data-stock-breakeven-form]", "data-stock-breakeven-output", ({ getNumber, setOutput }) => {
-            const buyPrice = getNumber("buyPrice");
-            const shares = getNumber("shares");
-            const buyFees = getNumber("buyFees");
-            const sellFees = getNumber("sellFees");
-            const totalCost = (buyPrice * shares) + buyFees;
-            const totalFees = buyFees + sellFees;
-            const requiredProceeds = totalCost + sellFees;
-            const breakEven = shares > 0 ? requiredProceeds / shares : 0;
+            const { breakEven, totalCost, totalFees, requiredProceeds } = computeStockBreakeven({
+                buyPrice: getNumber("buyPrice"),
+                shares: getNumber("shares"),
+                buyFees: getNumber("buyFees"),
+                sellFees: getNumber("sellFees"),
+            });
 
             setOutput("breakEven", formatNumber(breakEven));
             setOutput("totalCost", formatNumber(totalCost));
@@ -285,13 +517,12 @@
         });
 
         bindCalculatorForm("[data-roi-form]", "data-roi-output", ({ getNumber, setOutput }) => {
-            const initial = getNumber("initial");
-            const final = getNumber("final");
-            const income = getNumber("income");
-            const fees = getNumber("fees");
-            const totalReturn = final + income - fees;
-            const gain = totalReturn - initial;
-            const roi = initial > 0 ? (gain / initial) * 100 : 0;
+            const { roi, gain, totalReturn, fees } = computeRoi({
+                initial: getNumber("initial"),
+                final: getNumber("final"),
+                income: getNumber("income"),
+                fees: getNumber("fees"),
+            });
 
             setOutput("roi", `${formatNumber(roi)}%`);
             setOutput("gain", formatNumber(gain));
@@ -300,13 +531,12 @@
         });
 
         bindCalculatorForm("[data-total-return-form]", "data-total-return-output", ({ getNumber, setOutput }) => {
-            const initial = getNumber("initial");
-            const ending = getNumber("ending");
-            const income = getNumber("income");
-            const fees = getNumber("fees");
-            const netEnding = ending + income - fees;
-            const gain = netEnding - initial;
-            const returnPct = initial > 0 ? (gain / initial) * 100 : 0;
+            const { returnPct, gain, netEnding, income } = computeTotalReturn({
+                initial: getNumber("initial"),
+                ending: getNumber("ending"),
+                income: getNumber("income"),
+                fees: getNumber("fees"),
+            });
 
             setOutput("returnPct", `${formatNumber(returnPct)}%`);
             setOutput("gain", formatNumber(gain));
@@ -315,14 +545,11 @@
         });
 
         bindCalculatorForm("[data-cagr-form]", "data-cagr-output", ({ getNumber, setOutput }) => {
-            const beginning = getNumber("beginning");
-            const ending = getNumber("ending");
-            const years = getNumber("years");
-            const gain = ending - beginning;
-            const totalReturn = beginning > 0 ? (gain / beginning) * 100 : 0;
-            const cagr = beginning > 0 && ending > 0 && years > 0
-                ? ((ending / beginning) ** (1 / years) - 1) * 100
-                : 0;
+            const { cagr, gain, totalReturn, years } = computeCagr({
+                beginning: getNumber("beginning"),
+                ending: getNumber("ending"),
+                years: getNumber("years"),
+            });
 
             setOutput("cagr", `${formatNumber(cagr)}%`);
             setOutput("gain", formatNumber(gain));
@@ -331,13 +558,12 @@
         });
 
         bindCalculatorForm("[data-capital-gains-form]", "data-capital-gains-output", ({ getNumber, setOutput }) => {
-            const saleValue = getNumber("saleValue");
-            const purchaseValue = getNumber("purchaseValue");
-            const fees = getNumber("fees");
-            const otherCosts = getNumber("otherCosts");
-            const costs = fees + otherCosts;
-            const costBasis = purchaseValue + costs;
-            const gain = saleValue - costBasis;
+            const { gain, costBasis, saleValue, costs } = computeCapitalGains({
+                saleValue: getNumber("saleValue"),
+                purchaseValue: getNumber("purchaseValue"),
+                fees: getNumber("fees"),
+                otherCosts: getNumber("otherCosts"),
+            });
 
             setOutput("gain", formatNumber(gain));
             setOutput("costBasis", formatNumber(costBasis));
@@ -346,14 +572,12 @@
         });
 
         bindCalculatorForm("[data-after-tax-form]", "data-after-tax-output", ({ getNumber, setOutput }) => {
-            const profit = getNumber("profit");
-            const investment = getNumber("investment");
-            const taxRate = getNumber("taxRate");
-            const fees = getNumber("fees");
-            const taxableProfit = Math.max(profit, 0);
-            const tax = taxableProfit * (taxRate / 100);
-            const afterTaxProfit = profit - tax - fees;
-            const returnPct = investment > 0 ? (afterTaxProfit / investment) * 100 : 0;
+            const { returnPct, afterTaxProfit, tax, fees } = computeAfterTax({
+                profit: getNumber("profit"),
+                investment: getNumber("investment"),
+                taxRate: getNumber("taxRate"),
+                fees: getNumber("fees"),
+            });
 
             setOutput("returnPct", `${formatNumber(returnPct)}%`);
             setOutput("afterTaxProfit", formatNumber(afterTaxProfit));
@@ -362,16 +586,14 @@
         });
 
         bindCalculatorForm("[data-brokerage-form]", "data-brokerage-output", ({ getNumber, setOutput }) => {
-            const buyTurnover = getNumber("buyTurnover");
-            const sellTurnover = getNumber("sellTurnover");
-            const brokerage = getNumber("brokerage");
-            const exchangeCharges = getNumber("exchangeCharges");
-            const taxes = getNumber("taxes");
-            const otherCharges = getNumber("otherCharges");
-            const totalTurnover = buyTurnover + sellTurnover;
-            const totalCharges = brokerage + exchangeCharges + taxes + otherCharges;
-            const chargeRate = totalTurnover > 0 ? (totalCharges / totalTurnover) * 100 : 0;
-            const netProceeds = sellTurnover - totalCharges;
+            const { totalCharges, totalTurnover, chargeRate, netProceeds } = computeBrokerageCharges({
+                buyTurnover: getNumber("buyTurnover"),
+                sellTurnover: getNumber("sellTurnover"),
+                brokerage: getNumber("brokerage"),
+                exchangeCharges: getNumber("exchangeCharges"),
+                taxes: getNumber("taxes"),
+                otherCharges: getNumber("otherCharges"),
+            });
 
             setOutput("totalCharges", formatNumber(totalCharges));
             setOutput("totalTurnover", formatNumber(totalTurnover));
@@ -380,15 +602,13 @@
         });
 
         bindCalculatorForm("[data-intraday-form]", "data-intraday-output", ({ getNumber, setOutput }) => {
-            const buyPrice = getNumber("buyPrice");
-            const sellPrice = getNumber("sellPrice");
-            const quantity = getNumber("quantity");
-            const charges = getNumber("charges");
-            const marginUsed = getNumber("marginUsed");
-            const grossProfit = (sellPrice - buyPrice) * quantity;
-            const netProfit = grossProfit - charges;
-            const roi = marginUsed > 0 ? (netProfit / marginUsed) * 100 : 0;
-            const turnover = (buyPrice + sellPrice) * quantity;
+            const { netProfit, grossProfit, roi, turnover } = computeIntradayTrade({
+                buyPrice: getNumber("buyPrice"),
+                sellPrice: getNumber("sellPrice"),
+                quantity: getNumber("quantity"),
+                charges: getNumber("charges"),
+                marginUsed: getNumber("marginUsed"),
+            });
 
             setOutput("netProfit", formatNumber(netProfit));
             setOutput("grossProfit", formatNumber(grossProfit));
@@ -397,15 +617,13 @@
         });
 
         bindCalculatorForm("[data-delivery-form]", "data-delivery-output", ({ getNumber, setOutput }) => {
-            const buyPrice = getNumber("buyPrice");
-            const sellPrice = getNumber("sellPrice");
-            const quantity = getNumber("quantity");
-            const charges = getNumber("charges");
-            const days = getNumber("days");
-            const totalCost = buyPrice * quantity;
-            const netProfit = ((sellPrice - buyPrice) * quantity) - charges;
-            const roi = totalCost > 0 ? (netProfit / totalCost) * 100 : 0;
-            const annualized = days > 0 ? roi * (365 / days) : 0;
+            const { netProfit, roi, totalCost, annualized } = computeDeliveryTrade({
+                buyPrice: getNumber("buyPrice"),
+                sellPrice: getNumber("sellPrice"),
+                quantity: getNumber("quantity"),
+                charges: getNumber("charges"),
+                days: getNumber("days"),
+            });
 
             setOutput("netProfit", formatNumber(netProfit));
             setOutput("roi", `${formatNumber(roi)}%`);
@@ -414,13 +632,11 @@
         });
 
         bindCalculatorForm("[data-spread-form]", "data-spread-output", ({ getNumber, setOutput }) => {
-            const bid = getNumber("bid");
-            const ask = getNumber("ask");
-            const quantity = getNumber("quantity");
-            const spread = Math.max(ask - bid, 0);
-            const mid = (ask + bid) / 2;
-            const spreadCost = spread * quantity;
-            const spreadPct = mid > 0 ? (spread / mid) * 100 : 0;
+            const { spreadCost, spread, mid, spreadPct } = computeBidAskSpread({
+                bid: getNumber("bid"),
+                ask: getNumber("ask"),
+                quantity: getNumber("quantity"),
+            });
 
             setOutput("spreadCost", formatNumber(spreadCost));
             setOutput("spread", formatNumber(spread));
@@ -448,33 +664,13 @@
                 return values;
             };
 
-            const calculateExpression = (expression, values) => {
-                const names = Object.keys(values);
-                const args = names.map((name) => values[name]);
-                const fn = new Function("Math", ...names, `"use strict"; return (${expression});`);
-                const result = fn(Math, ...args);
-                return Number.isFinite(result) ? result : 0;
-            };
-
-            const formatFormulaValue = (value, format) => {
-                if (format === "percent") {
-                    return `${formatNumber(value)}%`;
-                }
-
-                if (format === "integer") {
-                    return formatNumber(value, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-                }
-
-                return formatNumber(value);
-            };
-
             const calculate = () => {
                 const values = getValues();
 
                 outputs.forEach((output) => {
                     const expression = output.dataset.formulaOutput;
                     const format = output.dataset.formulaFormat || "number";
-                    const value = calculateExpression(expression, values);
+                    const value = evaluateFormula(expression, values);
                     output.textContent = formatFormulaValue(value, format);
                 });
             };
@@ -559,5 +755,7 @@
         window.addEventListener("scroll", setHeaderScrollState, { passive: true });
     };
 
-    initializeApp();
+    if (typeof document !== "undefined") {
+        initializeApp();
+    }
 })();
