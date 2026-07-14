@@ -271,6 +271,15 @@ p {
     letter-spacing: -0.04em;
 }
 
+.brand__logo {
+    display: block;
+    flex: 0 0 auto;
+    width: 3.75rem;
+    height: 3.75rem;
+    border-radius: 0.85rem;
+    object-fit: contain;
+}
+
 .brand__name {
     overflow: hidden;
     text-overflow: ellipsis;

@@ -1,0 +1,14 @@
+{
+  "name": "StockMarketWave",
+  "short_name": "StockMarketWave",
+  "description": "Free stock market, mutual fund, and ETF calculators for profit, SIP, SWP, STP, returns, dividends, risk, taxes, and portfolio planning.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f7f9fc",
+  "theme_color": "#0f766e",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "/assets/logo.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}
