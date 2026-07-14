@@ -203,6 +203,14 @@ p {
     gap: var(--space-4);
 }
 
+/* Full-bleed header so the brand logo sits in the left corner */
+.site-header .site-nav.container {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+    padding-inline: var(--space-4);
+}
+
 .site-nav__menu {
     display: flex;
     align-items: center;
