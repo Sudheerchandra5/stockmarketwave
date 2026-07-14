@@ -1,5 +1,22 @@
 # StockMarketWave - Hostinger (LiteSpeed) performance config
-# Handles compression, browser caching, and correct MIME types.
+# Handles canonical redirects, compression, browser caching, and MIME types.
+
+# ----------------------------------------------------------------------
+# 0) Canonical host + scheme (single 301 hop to https://stockmarketwave.com)
+#    Consolidates duplicate signals so Google indexes one canonical URL.
+# ----------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Force HTTPS and drop the www. prefix in a single redirect
+    RewriteCond %{HTTPS} off [OR]
+    RewriteCond %{HTTP_HOST} ^www\. [NC]
+    RewriteRule ^ https://stockmarketwave.com%{REQUEST_URI} [L,R=301]
+
+    # Redirect /index.html to the root so "/" is the only home URL
+    RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+    RewriteRule ^index\.html$ / [L,R=301]
+</IfModule>
 
 # ----------------------------------------------------------------------
 # 1) Compression (gzip via mod_deflate; LiteSpeed serves Brotli when enabled)
